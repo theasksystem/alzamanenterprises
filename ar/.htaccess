@@ -1,0 +1,35 @@
+Options +FollowSymLinks
+RewriteEngine on
+RewriteCond %{HTTPS} !on 
+RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$ 
+RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$ 
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+RewriteCond %{THE_REQUEST} ^.*/index.php
+RewriteRule ^(.*)index.php$ https://alzamanenterprises.com/ar$1 [R=301,L]
+RewriteCond %{HTTP_HOST} ^https://alzamanenterprises.com/ar$
+RewriteRule ^$ https://alzamanenterprises.com/ar [L,R=301]
+
+RewriteRule  ^admin/?$  admin/index.php [NC,L]
+RewriteRule  ^order-details/?$  order-details.php [NC,L]
+
+RewriteRule  ^about-us/?$   about-us.php  [NC,L]
+RewriteRule  ^contact-us/?$   contact-us.php  [NC,L]
+RewriteRule  ^cart/?$   cart.php  [NC,L]
+RewriteRule  ^wishlist/?$   wishlist.php  [NC,L]
+RewriteRule  ^checkout/?$   checkout.php  [NC,L]
+RewriteRule  ^vendors/?$   vendors.php  [NC,L]
+RewriteRule  ^request-vendors/?$   vendors2.php  [NC,L]
+RewriteRule  ^success/?$   success.php  [NC,L]
+RewriteRule  ^login-register/?$   login-register.php  [NC,L]
+RewriteRule  ^dashboard/?$   dashboard.php  [NC,L]
+RewriteRule  ^profile/?$   my-account.php  [NC,L]
+RewriteRule  ^address/?$   address.php  [NC,L]
+RewriteRule  ^products/?$   product.php  [NC,L]
+RewriteRule  ^new-password/?$   reset.php  [NC,L]
+RewriteRule  ^new-password-vendor/?$   reset2.php  [NC,L]
+RewriteRule  ^activate/(.*)/?$   activate.php?act=$1  [NC,L]
+RewriteRule  ^activate/?$   activate.php  [NC,L]
+RewriteRule  ^([A-Za-z0-9-]+)/?$  product-detail.php?productId=$1  [NC,L]
+
+
