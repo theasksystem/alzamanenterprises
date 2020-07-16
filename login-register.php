@@ -59,6 +59,7 @@ if(isset($_POST['loggedin'])){
   <section class="pt-20 pb-40">
     
       <!-- Login Starts -->
+    <div class="container">
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12" id="sign-in-form">
           <div class="login-wrap">
@@ -166,7 +167,7 @@ if(isset($_POST['loggedin'])){
           </div>
         </div>
       </div>
-
+    </div>
   </section>
 </div>
 

@@ -4,7 +4,7 @@
   <div class="footer-gray">
     <div class="footer-custom">
       <div class="row">
-        <div class="col-md-2 col-sm-6 col-xs-6 text-center">
+        <div class="col-md-2 col-sm-6 col-xs-6">
           <h6 class="ftr-hdr">COMPANY</h6>
           <ul class="ftr-links-sub">
             <li><a href="<?= $WebsiteUrl.'/'; ?>about-us">About Us</a></li>
@@ -12,7 +12,7 @@
             <li><a href="company.php#Careers" >Careers</a></li>
           </ul>
         </div>
-        <div class="col-md-2 col-sm-6 col-xs-6 text-center">
+        <div class="col-md-2 col-sm-6 col-xs-6">
           <h6 class="ftr-hdr">HELP</h6>
           <ul class="ftr-links-sub">
             <li><a href="help.php#payment" >Payments</a></li>
@@ -22,7 +22,7 @@
             <!--<li><a href="help.php#report" >Report Infringement</a></li>-->
           </ul>
         </div>
-        <div class="col-md-2 col-sm-6 col-xs-6 text-center">
+        <div class="col-md-2 col-sm-6 col-xs-6">
           <h6 class="ftr-hdr">POLICY</h6>
           <ul class="ftr-links-sub">
             <li><a href="policy.php#Return" >Return Policy</a></li>
@@ -33,14 +33,14 @@
             <!--<li><a href="policy.php#Compliance">EPR Compliance</a></li>-->
           </ul>
         </div>
-        <div class="col-md-2 col-sm-6 col-xs-6 text-center">
+        <div class="col-md-2 col-sm-6 col-xs-6">
           <h6 class="ftr-hdr">ALZAMAN BUSINESS</h6>
           <ul class="ftr-links-sub">
             <li><a href="javascript:;" rel="nofollow">Online Shopping</a></li>
             <li><a href="vendors" rel="nofollow">Sell With Us</a></li>
           </ul>
         </div>
-        <div class="col-md-4 col-sm-12 col-xs-12 text-center">
+        <div class="col-md-4 col-sm-12 col-xs-12">
           <h6 class="ftr-hdr">Sign up for exclusive offers and inspiration</h6>
           <div id="ftr-email" class="ftr-email-form">
             <form id="ftrEmailForm" name="reg">

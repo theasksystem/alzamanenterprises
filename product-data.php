@@ -134,7 +134,7 @@ if(isset($_POST["action"])){
         
         <?php  $d++; }}else{ ?>
         
-        <div class="col-md-12"><h2>No product  found for “<?php if($_POST["keywords"]!=''){ echo $_POST["keywords"]; } ?>”</h2></div>
+        <div class="col-md-12"><h2>&emsp;No product Found<?php if($_POST["keywords"]!=''){?> for “<?php echo $_POST["keywords"];?>”<?php  }?> </h2></div>
 
     <?php  } } ?>
 
