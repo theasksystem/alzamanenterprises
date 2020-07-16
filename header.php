@@ -223,8 +223,11 @@ if($topbar['visible']==1){
                         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
                         <script>
                         $(document).ready(function(){
-                          $(".login-p").click(function(){
+                          $(".login-list").hover(function(){
                             $(".login-drop").toggle();
+                            $(".login-drop").css("display","block");
+                          }, function() {
+                            $(".login-drop").css("display","none");
                           });
                         });
                         </script>
