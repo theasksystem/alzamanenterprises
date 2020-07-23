@@ -25,8 +25,7 @@ $userDetailsFetch = $userDetails->fetch(PDO::FETCH_ASSOC);
     <li class="treeview"><a href="new_orderss.php"><i class="fa fa-fw fas fa-shopping-cart"></i> <span>New Orders</span></a></li>
     <li class="treeview"><a href="approved_orderss.php"><i class="fa fa-fw fas fa-shopping-cart"></i> <span>Approved Orders</span></a></li>
 	<li class="treeview"><a href="orders_lists.php"><i class="fa fa-fw fas fa-shopping-cart"></i> <span>Orders History</span></a></li>
-	<li class="treeview"><a href="reject_lists.php"><i class="fa fa-fw fas fa-shopping-cart"></i> <span>Reject Orders History</span></a></li> 
-    <li class="treeview"><a href="commission.php"><i class="fa fa-percent" aria-hidden="true"></i> <span>Products Commission</span></a></li> 
+	<li class="treeview"><a href="reject_lists.php"><i class="fa fa-fw fas fa-shopping-cart"></i> <span>Reject Orders History</span></a></li>
     <li class="treeview"><a href="view-coupan.php"><i class="fa fa-barcode"></i> <span>Coupan Code</span></a></li>
    
     
