@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/n4ikldrugvbg/public_html/
+    - export DEPLOYPATH=/home/n4ikldrugvbg/public_html/GITHUBTEST
     - /bin/cp -R alzamanenterprises $DEPLOYPATH
