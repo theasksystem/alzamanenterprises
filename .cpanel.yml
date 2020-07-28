@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/n4ikldrugvbg/public_html/alzamanenterprises
+    - /bin/cp -R * $DEPLOYPATH
