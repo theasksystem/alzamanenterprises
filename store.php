@@ -9,9 +9,16 @@ $storeId= base64_decode(base64_decode(base64_decode($_GET['own'])));
 $getProductdetail = $conn->prepare("SELECT id,quantity,discount,discount_type,slug,image,p_size,p_color,product_name_en,price,old_price FROM products WHERE user_id = '$storeId' and status = 1 order by id desc");
 $getProductdetail->execute();
 
+$followdetail = $conn->prepare("SELECT user_id from tbl_follow WHERE store_id = '$storeId' and user_id = '".$_SESSION['LOGIN_ID']."'");
+$followdetail->execute();
+
+$followCount = $conn->prepare("SELECT count(*) as total from tbl_follow WHERE store_id = '$storeId'");
+$followCount->execute();
+
 $getSellerdetail = $conn->prepare("SELECT id,company FROM tbl_admin WHERE id = '$storeId'");
 $getSellerdetail->execute();
 $getSellerRow = $getSellerdetail->fetch(PDO::FETCH_ASSOC);
+
 
 ?>
 
@@ -24,7 +31,15 @@ $_SESSION['previous_page'] = $absolute_url;
 <section class="product-filter-section" style="padding-top:20px">
 		<div class="container-fluid">
 			<div class="section-title">
-				<h2><?=ucwords($getSellerRow['company']); ?> Products</h2>
+        <h2><?=ucwords($getSellerRow['company']); ?> Products
+        <?php  
+          if( $followdetail->rowCount() > 0 )  { ?>
+            <span class="follow"><a class="fa fa-check-circle" aria-hidden="true" href="#" ><span style="font-family: sans-serif">&nbsp;Following</span></a></span> 
+          <?php } else { ?>
+            <span class="follow"><a href="<?= $WebsiteUrl.'/'; ?>follow.php?store='<?=base64_encode(base64_encode(base64_encode($storeId)));?>'">Follow&nbsp;Us&nbsp;&nbsp;<i class="fas fa-bell"></i></a></span>
+          <?php } ?>
+        </h2>
+        <h3>TEst data</h3>
 			</div>
 		
 			<div class="row">
@@ -155,7 +170,6 @@ $_SESSION['previous_page'] = $absolute_url;
 <?php include('footer.php'); ?>
 	<script>
 	 $(document).on('click', '.addtocart', function(){
-
         var product_id = $(this).attr("id");
         var pagetotal = $('#price'+product_id+'').val();
 		var qty = 1;
@@ -196,7 +210,6 @@ $_SESSION['previous_page'] = $absolute_url;
     });
 
 $(document).on('click', '.mywishlist', function(){
-
         var product_id = $(this).attr("id");
         var pagetotal = $('#price'+product_id+'').val();
 		var qty = 1;
@@ -235,8 +248,6 @@ $(document).on('click', '.mywishlist', function(){
             });
       }
     });
-
-
 </script>
 </body>
 </html>
