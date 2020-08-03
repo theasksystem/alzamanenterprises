@@ -39,7 +39,6 @@ $_SESSION['previous_page'] = $absolute_url;
             <span class="follow"><a href="<?= $WebsiteUrl.'/'; ?>follow.php?store='<?=base64_encode(base64_encode(base64_encode($storeId)));?>'">Follow&nbsp;Us&nbsp;&nbsp;<i class="fas fa-bell"></i></a></span>
           <?php } }?>
         </h2>
-        <h3>TEst data</h3>
 			</div>
 		
 			<div class="row">
