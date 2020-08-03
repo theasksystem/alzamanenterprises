@@ -32,12 +32,12 @@ $_SESSION['previous_page'] = $absolute_url;
 		<div class="container-fluid">
 			<div class="section-title">
         <h2><?=ucwords($getSellerRow['company']); ?> Products
-        <?php  
+        <?php  if($_SESSION['LOGIN_ID']!=''){
           if( $followdetail->rowCount() > 0 )  { ?>
             <span class="follow"><a class="fa fa-check-circle" aria-hidden="true" href="#" ><span style="font-family: sans-serif">&nbsp;Following</span></a></span> 
           <?php } else { ?>
             <span class="follow"><a href="<?= $WebsiteUrl.'/'; ?>follow.php?store='<?=base64_encode(base64_encode(base64_encode($storeId)));?>'">Follow&nbsp;Us&nbsp;&nbsp;<i class="fas fa-bell"></i></a></span>
-          <?php } ?>
+          <?php } }?>
         </h2>
         <h3>TEst data</h3>
 			</div>
