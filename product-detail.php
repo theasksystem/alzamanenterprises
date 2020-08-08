@@ -66,6 +66,62 @@ $_SESSION['previous_page'] = $absolute_url;
     img.img-circle {
     width: 50px;
 }
+
+/* The popup form - hidden by default */
+.form-popup {
+    display: none;
+    top:50%;
+    left:50%;
+    margin-left: -210px;
+    margin-top: -255px;
+    padding: 1%;
+    opacity: 1;
+    z-index: 1;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+    cursor: pointer;
+    transform: translate(30%,-30%);
+    -ms-transform: translate(20%,-30%);
+    width: 60%;
+    -moz-box-shadow: 0 0 3px #ccc;
+    -webkit-box-shadow: 0 0 3px #ccc;
+    box-shadow: 0 0 3px #ccc;
+}
+
+/* Add styles to the form container */
+.form-container {
+  width: 100%;
+  padding: 7px;
+  background-color: white;
+  opacity: 1;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #DAA520;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 50%;
+  height: 30%;
+  margin-bottom:5px;
+  opacity: 1;
+}
+
+.close {
+  cursor: pointer;
+  position: absolute;
+  top: 10%;
+  right: 0%;
+  padding: 12px 16px;
+  transform: translate(0%, -50%);
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: red;
+}
 </style>
 	<!-- product section -->
 	<section class="product-section">
@@ -204,14 +260,25 @@ $_SESSION['previous_page'] = $absolute_url;
                     		   
                     		    <button class="site-btn" type="button"> Request Sent</button>
                     		<?php }else{ ?>
-							<button class="site-btn sendNotify" type="button"  id="<?= $getProductRow['id']; ?>"></i> Notify me</button>
+							<button class="site-btn" onclick="openForm()" type="button"  id="<?= $getProductRow['id']; ?>"></i> Notify me</button>
 							<img id="cartloader2" height="40" width="40" style="display: none;" src="images/loader.gif">
                             <?php }}else{ ?> 
                             <button class="site-btn" type="button"  id="<?= $getProductRow['id']; ?>" onClick="return alert('Please Login First for restock notification');"> Notify me</button>
-                            <?php }} ?>
-                            
-                
+                            <?php }} ?>   
+                            <div class="form-popup" id="myForm">
+                              <form action="" class="form-container">
+                                <h3><b>Please select your Notification type</h3><span onclick="closeForm()" class="close">&times;</span><br>
+                                <input type="radio" id="notifytype" name="notifytype" value="EMAIL" checked>
+                                <label for="email"><b>Email</b></label><br>
+                                <input type="radio" id="notifytype" name="notifytype" value="SMS">
+                                <label for="sms"><b>SMS</b></label><br>
+                                <input type="radio" id="notifytype" name="notifytype" value="BOTH">
+                                <label for="both"><b>Both</b></label>
+                                <center><button class="btn fetchType">Submit</button></center></br></br>
+                              </form>
+                            </div>      
                     </div>
+
 					<div id="accordion" class="accordion-area col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="panel">
 							<div class="panel-header" id="headingOne">
@@ -465,7 +532,7 @@ $_SESSION['previous_page'] = $absolute_url;
 
         
 	</section>
-	<!-- letest product section end -->
+  <!-- letest product section end -->
 
 <?php include('footer.php'); ?>
 
@@ -694,11 +761,11 @@ $(document).on('click', '.mywishlist', function(){
       }
     });
     
-$(document).on('click', '.sendNotify', function(){
+$(document).on('click', '.fetchType', function(){
 
+        var type = document.querySelector('input[name = "notifytype"]:checked').value;
         var notify_product = '<?= $getProductRow['id']; ?>';
-
-        var dataString = 'notify_product='+ notify_product;
+        var dataString = 'notify_product='+ notify_product + '&type=' + type;
 	//	alert(dataString);
         $.ajax({
                 type: "POST",
@@ -719,6 +786,14 @@ $(document).on('click', '.sendNotify', function(){
             });
 
     });
+
+    function openForm() {
+      document.getElementById("myForm").style.display = "block";
+    }
+
+    function closeForm() {
+      document.getElementById("myForm").style.display = "none";
+    }
 </script>
 </body>
 </html>

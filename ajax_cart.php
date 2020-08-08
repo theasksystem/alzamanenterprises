@@ -179,13 +179,15 @@ if(isset($_POST['notify_product'])){
 
     $unid  = $_SESSION['LOGIN_ID'];
     $pid   = $_POST['notify_product'];
+    $type  = $_POST['type'];
     $sendmail = 0;
     
 
-        $stmt = $conn->prepare("INSERT INTO `send_notify`(`user_id`, `product_id`, `send_mail`)  VALUES (:unid, :pid, :price)");
+        $stmt = $conn->prepare("INSERT INTO `send_notify`(`user_id`, `product_id`, `send_mail`,`type`)  VALUES (:unid, :pid, :price, :type)");
         $stmt->bindParam(':unid', $unid, PDO::PARAM_STR);
         $stmt->bindParam(':pid', $pid, PDO::PARAM_INT);
         $stmt->bindParam(':price', $sendmail, PDO::PARAM_STR);
+        $stmt->bindParam(':type', $type, PDO::PARAM_STR);
         $stmt->execute();
         
         
