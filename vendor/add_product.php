@@ -15,11 +15,12 @@ $edit = $_GET['edit'];
 $w = 500; $h = 500;
 $time = time();
 
-$userDetails22 = $conn->prepare("select store_storage from tbl_admin where id = :adm_id");
+$userDetails22 = $conn->prepare("select store_storage,category from tbl_admin where id = :adm_id");
 $userDetails22->bindValue(':adm_id', $_SESSION['VENDOR_ID'], PDO::PARAM_STR);
 $userDetails22->execute();
 $userDetailsFetch22 = $userDetails22->fetch(PDO::FETCH_ASSOC);
 $totalUploadLimit=$userDetailsFetch22['store_storage'];
+$vendor_category=$userDetailsFetch22['category'];
 
 $countpp = $conn->prepare("select * from products where user_id = '".$_SESSION['VENDOR_ID']."'");
 $countpp->execute();
@@ -410,11 +411,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                   <div class="form-group">
                     <label>Select Tab</label>
                     <select class="form-control" name="tab" onChange="fetch_select(this.value);" required>
-                      <option value="">Select Tab</option>
+                    <option value="">Select Tab</option>
                       <?php 
-													
-						$department = $conn->query("SELECT * FROM `department` WHERE visible=1 ORDER BY `id` asc");
-						while($departmentRow = $department->fetch(PDO::FETCH_ASSOC)){
+                      
+            $department = $conn->prepare("SELECT * FROM `department` WHERE visible=1 and id = :catid");
+            $department->bindValue(':catid', $vendor_category, PDO::PARAM_INT);
+            $department->execute();
+            while($departmentRow = $department->fetch(PDO::FETCH_ASSOC)){
 						
 					  ?>
                       <option value="<?php echo $departmentRow['id'];  ?>"><?php echo $departmentRow['name_en'].'('.$departmentRow['name_ar'].')';  ?></option>
