@@ -397,6 +397,50 @@ a.showcoupon {
            </div>
                         
            </div>
+          <!-- Delivery Date & Time Selection -->
+          <div>
+              <h2>DELIVERY DATE & TIME</h2></br>
+              <div>
+                <div class="row">
+                  <div class="deliverydate">
+                    <label for="deliverydate">&emsp;Select the Date&emsp;&emsp;&emsp;</label>
+                      <select name="deliverydate" id="deliverydate" required>
+                        <?php 
+                          $date = new DateTime(null, new DateTimeZone('Asia/Qatar'));
+                          $hour = $date->format('H');
+                          $hour = $hour +21;
+                          $excludeTimeSlots = true;
+                          for( $i = 1; $i<=3 ; $i++)  {
+                            if($i != 1)
+                              $date->add(new DateInterval('P1D'));
+                            if($hour >= 20 && $i == 1)  {
+                              $excludeTimeSlots = false;
+                              continue;
+                            }
+                          ?>
+                          <option value="<?php echo $date->format('Y-m-d');?>"><?php echo $date->format('Y-m-d')?></option>
+                        <?php  }  ?>
+                      </select>
+                  </div>
+                </div></br>
+                <div class="row">
+                  <div class="deliverytime">
+                    <label for="deliverytime">&emsp;Select the Time Slot&emsp;</label>
+                      <select name="deliverytime" id="deliverytime" required>
+                          <?php if ($hour < 12 || $excludeTimeSlots == false) { ?>
+                            <option value="12PM-4PM" >12PM-4PM</option>
+                          <?php } ?>
+                          <?php if ($hour < 16 || $excludeTimeSlots == false) { ?>
+                            <option value="4PM-8PM"  >4PM-8PM</option>
+                          <?php } ?>
+                          <?php if ($hour < 20 || $excludeTimeSlots == false) { ?>
+                            <option value="8PM-12AM" >8PM-12AM</option>
+                          <?php } ?>
+                      </select>
+                  </div>        
+                </div>
+              </div>
+          </div>
                         <div class="col-md-12 col-sm-12 col-xs-12">
                        
                         <div class="float-right col-md-12 col-sm-12 col-xs-12">
@@ -620,6 +664,22 @@ $('#apply_coupon').on("click", function(){
             });
      }
 
+});
+
+$(".deliverydate").change(function(){
+  var selectedDate =  $('.deliverydate option:selected').text();
+  selectedDate = selectedDate.substring(selectedDate.lastIndexOf("-")+1);
+  var currentDate = new Date().getDate().toLocaleString("en-US", {timeZone: "Asia/Qatar"});
+  if (selectedDate != currentDate)  {
+    $('.deliverytime').html("<label for=\"deliverytime\">&emsp;Select the Time Slot&emsp;</label>\
+                      <select name=\"deliverytime\" id=\"deliverytime\" required>\
+                        <option value=\"12PM-4PM\" >12PM-4PM</option>\
+                        <option value=\"4PM-8PM\"  >4PM-8PM</option>\
+                        <option value=\"8PM-12AM\" >8PM-12AM</option>\
+                      </select>")
+  }
+
+  
 });
 
 $('#addAddress').on("click", function(){

@@ -67,11 +67,13 @@ if (isset($_REQUEST['pay_now']))
     $order_total =$_SESSION['cartTotal']= $totalamt;
     $payment_mode = $_POST["payment_mode"];
     $userid = $_SESSION['LOGIN_ID'];
-	$_SESSION['ADDRESS'] = $shipAddress;
+    $deliverydate = $_POST["deliverydate"];
+    $deliverytime = $_POST["deliverytime"];
+	  $_SESSION['ADDRESS'] = $shipAddress;
 	
-	$srstmt = $conn->prepare("INSERT INTO `cart_orders`(`un_id`, `user_id`, `ship_charge`, `total`, `curr_ip`, `created_at`, `payment_mode`, `address_id`, `coupan_id`, `coupan_uid`, `coupan_value`, `coupan_code`)
+	$srstmt = $conn->prepare("INSERT INTO `cart_orders`(`un_id`, `user_id`, `ship_charge`, `total`, `curr_ip`, `created_at`, `payment_mode`, `address_id`, `coupan_id`, `coupan_uid`, `coupan_value`, `coupan_code`,`delivery_date`,`delivery_timeslot`)
 
-        VALUES (:un_id, :uid, :shippingcharg, :total, :crrid, :createdat, :payment_mode, :addid, :cpnid, :cpnuid, :cpnamount, :code)");
+        VALUES (:un_id, :uid, :shippingcharg, :total, :crrid, :createdat, :payment_mode, :addid, :cpnid, :cpnuid, :cpnamount, :code, :deliverydate, :deliverytime)");
 
         $srstmt->bindParam(':un_id', $_SESSION['UNIQUEID'], PDO::PARAM_STR);
         $srstmt->bindParam(':uid', $userid, PDO::PARAM_STR);
@@ -79,12 +81,14 @@ if (isset($_REQUEST['pay_now']))
         $srstmt->bindParam(':total', $totalamt, PDO::PARAM_STR);
         $srstmt->bindParam(':crrid', $_SERVER['REMOTE_ADDR'], PDO::PARAM_STR);
         $srstmt->bindParam(':createdat',$globaldate, PDO::PARAM_STR);
-		$srstmt->bindParam(':payment_mode', $payment_mode, PDO::PARAM_STR);
-    	$srstmt->bindParam(':addid', $shipAddress, PDO::PARAM_INT);
+		    $srstmt->bindParam(':payment_mode', $payment_mode, PDO::PARAM_STR);
+    	  $srstmt->bindParam(':addid', $shipAddress, PDO::PARAM_INT);
         $srstmt->bindParam(':cpnid', $CoupanCode['id'], PDO::PARAM_INT);
         $srstmt->bindParam(':cpnuid', $CoupanCode['uid'], PDO::PARAM_INT);
         $srstmt->bindParam(':cpnamount', $discount, PDO::PARAM_STR);
         $srstmt->bindParam(':code', $CoupanCode['code'], PDO::PARAM_STR);
+        $srstmt->bindParam(':deliverydate', $deliverydate, PDO::PARAM_STR);
+        $srstmt->bindParam(':deliverytime', $deliverytime, PDO::PARAM_STR);
         $srstmt->execute();
 		
 		if($srstmt == true){
