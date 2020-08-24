@@ -161,7 +161,7 @@ $_SESSION['previous_page'] = $absolute_url;
       <div class="clearfix"></div>
     </div>
     <?php if($_SESSION['LOGIN_ID']!=''){ ?>
-    <div class="new-tbn"> <a href="checkout">Place Order</a> </div>
+    <div class="new-tbn"> <div class="new-tbn"> <a href="<?= $WebsiteUrl; ?>">Continue Shopping</a> <a href="checkout">Place Order</a> </div>
     <?php }else{ ?>
     <div class="new-tbn"> <a href="<?= $WebsiteUrl; ?>">Continue Shopping</a> <a href="javascript:;" onClick="return confirm('You are Not Logged In. Login First and then Checkout');">Place Order</a> </div>
     <?php }} ?>
