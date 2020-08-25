@@ -408,7 +408,6 @@ a.showcoupon {
                         <?php 
                           $date = new DateTime(null, new DateTimeZone('Asia/Qatar'));
                           $hour = $date->format('H');
-                          $hour = $hour +21;
                           $excludeTimeSlots = true;
                           for( $i = 1; $i<=3 ; $i++)  {
                             if($i != 1)
