@@ -676,6 +676,19 @@ $(".deliverydate").change(function(){
                         <option value=\"4PM-8PM\"  >4PM-8PM</option>\
                         <option value=\"8PM-12AM\" >8PM-12AM</option>\
                       </select>")
+  } else {
+    $('.deliverytime').html("<label for=\"deliverytime\">&emsp;Select the Time Slot&emsp;</label>\
+                      <select name=\"deliverytime\" id=\"deliverytime\" required>\
+                          <?php if ($hour < 12 || $excludeTimeSlots == false) { ?>\
+                            <option value=\"12PM-4PM\" >12PM-4PM</option>\
+                          <?php } ?>\
+                          <?php if ($hour < 16 || $excludeTimeSlots == false) { ?>\
+                            <option value=\"4PM-8PM\"  >4PM-8PM</option>\
+                          <?php } ?>\
+                          <?php if ($hour < 20 || $excludeTimeSlots == false) { ?>\
+                            <option value=\"8PM-12AM\" >8PM-12AM</option>\
+                          <?php } ?>\
+                      </select>")
   }
 
   
