@@ -165,7 +165,7 @@ $_SESSION['previous_page'] = $absolute_url;
 				</h2>	
 					
 					
-					<h5><?= 'QAR '.$getProductRow['price']; ?></h5>
+					<h5 class="p-price"><?= 'QAR '.$getProductRow['price']; ?></h5>
                     <?php if(!empty($getProductRow['old_price'])){ ?>
                     <h6><del><?= 'QAR '.$getProductRow['old_price']; ?></del></h6>
                     <?php } ?>
@@ -553,10 +553,20 @@ function photoChange(val,val2){
 					$(".loads").hide();
                 },
                 success: function(response){
-				//alert(data);
-			    $('.loadImage').html(response);
+                  $('.loadImage').html(response);
                 }
             });
+
+        $.ajax({
+              type: "POST",
+              url: "<?= $WebsiteUrl.'/'; ?>dataFetcher.php",
+              data: dataString,
+              cache: false,
+              success: function(response){
+                $('.p-price').html("QAR " + response);
+              }
+        });
+
 }
 $( document ).ready(function() {
     
