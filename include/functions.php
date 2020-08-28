@@ -1,5 +1,13 @@
 <?php
 
+function updateRate($db,$un_id,$ipAddress){
+    $total_Stock = 0;
+	$tabQuery = $db->prepare("SELECT * FROM cart WHERE un_id = '$un_id' OR curr_ip = '$IpAddress'");
+	$tabQuery->execute();
+	return $tabQuery;
+
+}
+
 function cartItems($db,$un_id,$ipAddress){
     $total_Stock = 0;
 	$tabQuery = $db->prepare("SELECT * FROM cart WHERE un_id = '$un_id' OR curr_ip = '$IpAddress'");

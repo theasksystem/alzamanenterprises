@@ -129,7 +129,14 @@ $_SESSION['previous_page'] = $absolute_url;
 			<div class="row">
 				<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
 					<div class="product-pic-zoom">
-						<img class="product-big-img" src="<?=$WebsiteUrl.'/'; ?>adminuploads/product/<?= $getProductRow['image']; ?>" alt="<?= $getProductRow['product_name_en']; ?>">
+            <?php 
+                if ( $getProductRow['image'] == "") {
+                  $image = "default-product-image.jpeg";
+                } else {
+                  $image = $getProductRow['image'];
+                }
+            ?>
+						<img class="product-big-img" src="<?=$WebsiteUrl.'/'; ?>adminuploads/product/<?= $image; ?>" alt="<?= $getProductRow['product_name_en']; ?>">
 					</div>
 					<div class="product-thumbs" tabindex="1" style="overflow: hidden; outline: none; margin-bottom:20px;">
 						<div class="product-thumbs-track loadImage" style="display: inline-flex;"  id="loadImage">
@@ -137,7 +144,7 @@ $_SESSION['previous_page'] = $absolute_url;
 							<div class="pt active" data-imgbigurl="<?=$WebsiteUrl.'/'; ?>adminuploads/product/<?= $getProductRow['image']; ?>"><img src="<?=$WebsiteUrl.'/'; ?>adminuploads/product/<?= $getProductRow['image']; ?>" alt="<?= $getProductRow['product_name_en']; ?>"></div>
                             <?php 		
 								$allImages = $conn->query("SELECT image FROM `product_images` WHERE product_id = '".$getProductRow['id']."' ORDER BY `id` asc");
-								$allImages->execute();
+                $allImages->execute();
 								while($getImagesRow = $allImages->fetch(PDO::FETCH_ASSOC)){
 									
 						    ?>
@@ -194,7 +201,7 @@ $_SESSION['previous_page'] = $absolute_url;
 						</div>
                         <?php $adddd++; }}else{ ?>
                         <div class="sc-item">
-							<p>N/A</p>
+							<p>ONE-SIZE</p>
                             <input type="radio" name="size" value="NA" checked>
 						</div>
 						<?php } ?>
