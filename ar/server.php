@@ -19,12 +19,12 @@ if(isset($_POST['query'])){
 	    echo '<ul class="typeahead dropdown-menu" role="listbox" style="top: 40px; left: 0px; display: block;">';
 		while($row = $sql->fetch(PDO::FETCH_ASSOC)) {
 			$countryResult2 = $row["product_name_en"];
-			echo '<li class="active"><a class="dropdown-item" href="products?s='.$countryResult2.'" role="option">'.$countryResult2.'</a></li>';
+			echo '<li class="active"><a class="dropdown-item" href="products?s='.$countryResult2.'" role="option">'.$countryResult2.'<p style="float:right;border-radius: 11px;background-color: #f0f0f1;padding: 2px 6px;">Product</p></a></li>';
 		}
 		while($row = $sqlstore->fetch(PDO::FETCH_ASSOC))	{
 			$countryResult2 = $row["company"];
 			$storeid = $row["id"];
-			echo '<li class="active"><a class="dropdown-item" href="store.php?own='.base64_encode(base64_encode(base64_encode($storeid))).'" role="option">'.$countryResult2.'</a></li>';
+			echo '<li class="active"><a class="dropdown-item" href="store.php?own='.base64_encode(base64_encode(base64_encode($storeid))).'" role="option">'.$countryResult2.'<p style="float:right;border-radius: 11px;background-color: #f0f0f1;padding: 2px 6px;">Store</p></a></li>';
 		}
 		echo '</ul>';
 	}

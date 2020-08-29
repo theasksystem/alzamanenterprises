@@ -105,7 +105,7 @@ if($topbar['visible']==1){
          
     </div><!--end of topoffersection-->
 <?php } ?>   
-    
+
 <div id="header2" > 
 <section id="header">
   <div class="container-fluid">
@@ -196,7 +196,7 @@ if($topbar['visible']==1){
           <div class="logo desktop-view"> <a href="<?= $WebsiteUrl; ?>"><img src="<?= $WebsiteUrl.'/'; ?>images/logo.png"></a> </div>
           <div class="search-bar">
             <form name="" action="products" method="get">
-            <input type="text" id="myInput" class="typeahead" name="s" placeholder="Search for products" autocomplete="off" value="<?=$_GET['s']; ?>">
+            <input type="text" id="myInput" class="typeahead" name="s" placeholder="Search for Products/Stores" autocomplete="off" value="<?=$_GET['s']; ?>">
             <button type="submit"><i class="fa fa-search"></i></button>
             <div id="myInput2"></div>
             </form>
@@ -223,7 +223,7 @@ if($topbar['visible']==1){
                         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
                         <script>
                         $(document).ready(function(){
-                          $(".login-list").hover(function(){
+                          $(".login-p").hover(function(){
                             $(".login-drop").toggle();
                             $(".login-drop").css("display","block");
                           }, function() {
