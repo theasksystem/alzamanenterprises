@@ -96,7 +96,7 @@ function OrderDetails($conn,$id){
 
 $shippingcharg = $orderdetail['ship_charge'];
 if($shippingcharg==0){ $shippingcharg2 = 'Free Shipping'; }else{ $shippingcharg2 = 'QAR '.$shippingcharg; }
-if($orderdetail['coupan_value']!=0 && $orderdetail['coupan_value']!=''){ $coupan = $orderdetail['coupan_value']; }else{ $coupan = ''; }
+if($orderdetail['coupan_value']!=0 && $orderdetail['coupan_value']!=''){ $coupan = $orderdetail['coupan_value']; }else{ $coupan = '00.00'; }
 $total = $orderdetail['total'];
 
   $billingquery = $conn->prepare("select * from registration WHERE id = '".$orderdetail['user_id']."'");
@@ -128,100 +128,100 @@ $total = $orderdetail['total'];
 		$paymethod='Store Pick Up';
 		}
 		
-		$orderdata ='<link rel="stylesheet" href="'.$WebsiteUrl.'/css/invoice.css" type="text/css" media="all">  
-    					<section class="thissection maintopwrapper col-md-12">
-  						<div class="container">
-   						<div class="row innerrow">
-      					<div class="col-md-6 leftheaderheading">
-        				<h2>Invoice</h2>
-        				</div>
-						<div class="col-md-6 headerlogo">
-						<img src="'.$WebsiteUrl.'/images/logo.png" alt="" title="" class="img-fluid" style="width: 50%;padding: 2%;
-    background: #000;margin-top: 10px;">
+		$orderdata ='<section class="thissection maintopwrapper col-md-12"  style="border:2px solid;border-color:#daa51e;">
+						<div class="row" style="background-color:black;border:1px solid;border-color:#daa51e;">
+							<div class="col-md-3">
+								<img src="'.$WebsiteUrl.'/images/logo.png" alt="" title="" class="img-fluid" style="width: 100%;padding: 2%;background: #000;margin-top: 10px;">
+							</div>
+							<div class="col-md-12" style="position: absolute;top:9%;left:10px;">
+								<span style="font-size:34px;font-weight:600;color:#daa51e;float:right;padding-right:25px;top:150px;">E-INVOICE</span>
+							</div>
 						</div>
-						<div class="col-md-4 commontext">
-						<h3>Date</h3>
-						<h4>'.date('d M, Y',strtotime($orderdetail['created_at'])).'</h4>
-						<p>ALZAMAN ENTERPRISES<br/>
-						Abdul Rahman Street<br/>
-						Doha<br/>
-						+974-31559977<br/>
-						info@alzamanenterprises.com
-						</p>
+						<div>
+							<div class="container">
+								<div class="col-md-3 commontext" style="font-size:18px;"></br>
+									<p><b>ALZAMAN ENTERPRISES</b></br>
+									+974-31559977</br>
+									<span style="color:#daa51e;"><u>info@alzaman.qa</u></span></p>
+								</div>
+							</div>
+							<div class="container">
+								<div class="col-md-3 commontext" style="font-size:18px;"></br>
+									<p><b style="color:#daa51e;">&emsp;INVOICE TO:</b></br>
+									&emsp;'.ucwords($fullname).'<br/>
+									&emsp;Building No- '.$billingdata2['state'].'<br/>
+									&emsp;Zone- '.$billingdata2['zip'].'<br/>
+									&emsp;Street Address- '.$billingdata2['address'].'<br/>
+									&emsp;City- '.$city.'<br/>
+									&emsp;Phone- '.$billingdata['phone'].'<br/>
+									</p>
+								</div>
+							</div>
+							<div class="container">
+								<div class="col-md-3 commontext" style="font-size:18px;"></br>
+									<p><b style="color:#daa51e;">&emsp;SHIP TO:</b></br>
+									&emsp;'.ucwords($fullname).'<br/>
+									&emsp;Building No- '.$billingdata2['state'].'<br/>
+									&emsp;Zone- '.$billingdata2['zip'].'<br/>
+									&emsp;Street Address- '.$billingdata2['address'].'<br/>
+									&emsp;City- '.$city.'<br/>
+									&emsp;Phone- '.$billingdata['phone'].'<br/>
+									</p>
+								</div>
+							</div>
+							<div class="container">
+								<div class="col-md-3 commontext" style="font-size:18px;"></br>
+									<p><b style="color:#daa51e;">&emsp;INVOICE NO : </b></br><b>&emsp; ALZ-'.$id.'</b></p>
+								</div>
+							</div>
 						</div>
-						<div class="col-md-4 commontext">
-						<h3>Invoice To:</h3>
-						<p>'.ucwords($fullname).'<br/>
-						Building No- '.$billingdata2['state'].'<br/>
-						Zone- '.$billingdata2['zip'].'<br/>
-						Street Address- '.$billingdata2['address'].'<br/>
-						City- '.$city.'<br/>
-              			Phone- '.$billingdata['phone'].'<br/>
-						
-						</p>
-          				</div>
-						<div class="col-md-4 commontext">
-						<h3>Ship To:</h3>
-						<label>Invoice No - ALZ-'.$id.'</label>
-						<p>'.ucwords($fullname).'<br/>
-						Building No- '.$billingdata2['state'].'<br/>
-						Zone- '.$billingdata2['zip'].'<br/>
-						Street Address- '.$billingdata2['address'].'<br/>
-						City- '.$city.'<br/>
-              			Phone- '.$billingdata['phone'].'<br/>
-						
-						</p>
+					</section>
+
+					<section style="border:2px solid;border-color:#daa51e;padding:13px;">
+						<div>
+							<span><b>&emsp;Payment Method : </b>'.$paymethod.'</span>
+							<span style="float:right;padding-right:25px;"><b>Order Date : </b>'.date('d/M/Y',strtotime($orderdetail['created_at'])).'</span></br>
+							<span><b>&emsp;Order Number : </b>ALZ - '.$id.'</span>
 						</div>
-						<div class="bottom"></div>
-						</div> 
-						</div>   
-						</section>
-						<section class="col-md-12 secondtablewrapper">
-						<div class="container-fluid">
-						<div class="row">
-						<div class="container">
-						<div class="card">
-						<div class="card-body">
-						<div class="table-responsive-sm">
-						<table class="table table-striped">
-						<thead>
-						<tr  style="background:#fff !important;color: #000;border: 1px solid #000;">
-						<th>S.NO.</th>
-						<th>Product Order ID</th>
-						<th>Product Description</th>
-						<th>Qty</th>
-						<th>Unit Price</th>
-						<th>Amount</th>
-						</tr>
-						</thead>
-						<tbody style="color: #000;border-bottom: 1px solid #000;">';
-						$mm=1;
-                   $maincartquery = $conn->prepare( "select c.*, p.product_name_en, p.image,p.user_id from cart_order_item c LEFT JOIN products p
+					</section>
+					
+					<section  style="border:2px solid;border-top:0;border-color:#daa51e;padding:5px;">
+						<div>
+							<table class="invoice-table" style="border:2px solid;border-color:#daa51e;border-spacing: 15px;width:100%;">
+								<thead>
+									<tr>
+										<th>S.NO.</th>
+										<th>Product Description</th>
+										<th>Qty</th>
+										<th>Unit Price</th>
+										<th>Amount</th>
+									</tr>
+								</thead>
+								<tbody>';
+
+					$mm=1;
+                    $maincartquery = $conn->prepare( "select c.*, p.product_name_en, p.image,p.user_id from cart_order_item c LEFT JOIN products p
 													ON p.id = c.pid where c.order_id = '$id'");
-                   $maincartquery->execute();
+                    $maincartquery->execute();
 
-                   while($maincart = $maincartquery->fetch(PDO::FETCH_ASSOC)){
-				   
-				   $size2 = $conn->prepare("select size from products_size where id = '".$maincart['size_id']."'");
-					$size2->execute();
-					$size3 = $size2->fetch(PDO::FETCH_ASSOC);
-					$size = $size3['size'];
+                    while($maincart = $maincartquery->fetch(PDO::FETCH_ASSOC))	{
+						$size2 = $conn->prepare("select size from products_size where id = '".$maincart['size_id']."'");
+						$size2->execute();
+						$size3 = $size2->fetch(PDO::FETCH_ASSOC);
+						$size = $size3['size'];
+						
+						$color2 = $conn->prepare("select color from products_color where id = '".$maincart['color_id']."'");
+						$color2->execute();
+						$color3 = $color2->fetch(PDO::FETCH_ASSOC);
+						$color = $color3['color'];
+						if($size!=''){ $size2=$size; }else{ $size2='N/A'; }
+						if($color!=''){ $color2=$color; }else{ $color2='N/A'; }
+						
+						$order_id2 = 'ALZ-'.$maincart['user_id'].'-'.$maincart['id'];
 					
-					$color2 = $conn->prepare("select color from products_color where id = '".$maincart['color_id']."'");
-					$color2->execute();
-					$color3 = $color2->fetch(PDO::FETCH_ASSOC);
-					$color = $color3['color'];
-					if($size!=''){ $size2=$size; }else{ $size2='N/A'; }
-					if($color!=''){ $color2=$color; }else{ $color2='N/A'; }
-					
-					$order_id2 = 'ALZ-'.$maincart['user_id'].'-'.$maincart['id'];
-				   
-					if (file_exists($WebsiteUrl.'/adminuploads/product/'.$maincart['image'])) {
-
+						if (file_exists($WebsiteUrl.'/adminuploads/product/'.$maincart['image'])) {
 							$image = $WebsiteUrl.'/adminuploads/product/'.$maincart['image'];
-
-						}else{
-
+						}	else	{
 							$image = $WebsiteUrl.'/adminuploads/product/'.$maincart['image'];
 						}
 
@@ -230,94 +230,48 @@ $total = $orderdetail['total'];
 
 						$subtotal2 =  $maincart['price']*$maincart['qty'];
 						$subtotal  =  $subtotal2; 
+
+						$orderdata = $orderdata.'
+						<tr>
+							<td>'.$mm++.'</td>
+							<td style="text-align:left">&emsp;'.stripslashes($maincart["product_name_en"]).' - (Size: '.$size2.') - (Color: '.$color2.')</td>
+							<td>'.$maincart['qty'].'</td>
+							<td>QAR '.$p_price.'</td>
+							<td>QAR '.$subtotal.'</td>
+						</tr>';								
+					}
+					$orderdata = $orderdata.'
+					<tr>
+						<td style="height:400px;"></td>
+						<td style="height:400px;"></td>
+						<td style="height:400px;"></td>
+						<td style="height:400px;"></td>
+						<td style="height:400px;"></td>
+					</tr>
+					</tbody>
+					</table>
+					<br>
+					<table class="invoice-total-table" style="border:2px solid;border-color:#daa51e;margin-right: 0px;margin-left: auto;">
+						<tr><td style="width:180px;">SubTotal</td><td style="width:112px">QAR '.($total+$shippingcharg).'</td></tr>
+						<tr><td>Store Discount</td><td></td></tr>
+						<tr><td>Discount</td><td></td></tr>
+						<tr><td>Coupon Discount</td><td>QAR '.$coupan.'</td></tr>
+						<tr><b><td><b>TOTAL</b></td><td><b>QAR '.(($total+$shippingcharg)-($coupan)).'</b></td></tr>
+					</table>
+					<div class="footer" style="height:150px"/></div>
+					<h6 style="vertical-align:bottom;"><center><b>Thank You for Shopping With <u style="color:#daa51e;">https://alzaman.qa</u></b></center></h6>
+					</div>
+					</section>
+					</br>
+					<section>
 						
-						$orderdata = $orderdata.'<tr>
-						<td>'.$mm++.'</td>
-						<td>'.$order_id2.'</td>
-						<td>'.stripslashes($maincart["product_name_en"]).'<br>(Size: '.$size2.')<br>(Color: '.$color2.')</td>
-						<td>'.$maincart['qty'].'</td>
-						<td>QAR '.$p_price.'</td>
-						<td>QAR '.$subtotal.'</td>
-						</tr>';
-						}
-						$orderdata = $orderdata.'</tbody>
-						</table>
+					</section>
+					</br>
+					<section>
+						<div style="bottom:10px">
+							
 						</div>
-						</div>
-						</div>
-						</div>
-						</div>
-						</div>
-						</section>
-						<section class="col-md-12 secondtotalsection">
-						<div class="container">
-						<div class="row">
-						<div class="col-lg-4 col-sm-5">
-						</div>
-						<div class="col-lg-4 col-sm-5 ml-auto">
-						<table class="table table-clear">
-						<tbody style="color: #000;">
-						<tr>
-						<td class="left">
-						<strong>Total Amount</strong>
-						</td>
-						<td class="right">QAR '.$total.'</td>
-						</tr>
-						<tr>
-						<td class="left">
-						<strong>Payment Mode</strong>
-						</td>
-						<td class="right">'.$paymethod.'</td>
-						</tr>
-						<tr>
-						<td class="left">
-						<strong>Shipping Charge</strong>
-						</td>
-						<td class="right">'.$shippingcharg2.'</td>
-						</tr>';
-						if($coupan!=''){ $orderdata = $orderdata.'<tr>
-						<td class="left">
-						<strong>Coupan Value</strong>
-						</td>
-						<td class="right">QAR '.$coupan.'</td>
-						</tr>
-						<tr>
-						<td class="left">
-						<strong>Total</strong>
-						</td>
-						<td class="right">
-						<strong>QAR '.(($total+$shippingcharg)-($coupan)).'</strong>
-						</td>
-						</tr>'; }else{
-						$orderdata = $orderdata.'<tr>
-						<td class="left">
-						<strong>Total Payable Amount</strong>
-						</td>
-						<td class="right">
-						<strong>QAR '.($total+$shippingcharg).'</strong>
-						</td>
-						</tr>'; }
-									
-						$orderdata = $orderdata.'</tbody>
-						</table>
-						</div>
-						</div>
-						</div>
-						</section>
-						<div class="col-md-12 text-center thankyou">
-						<div class="container">
-						<div class="row">
-						<h3>Thank You For Your Business</h3>
-						</div>
-						</div>
-						</div>
-						<div class="col-md-12 footer">
-						<div class="container">
-						<div class="row">
-						<div class="footerbootom"></div>
-						</div>
-						</div>
-						</div>';
+					</section>';
 	
   return $orderdata;
 

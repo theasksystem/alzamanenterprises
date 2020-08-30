@@ -223,7 +223,7 @@ $_SESSION['previous_page'] = $absolute_url;
 					   
                         
                      <?php $adcolor++; }}else{ ?>
-                     <p>N/A</p><input type="radio" name="cs" value="NA" checked> 
+                     <p>Single-Colored</p><input type="radio" name="cs" value="NA" checked> 
                      <?php } ?>
                         </div> 
 					</div>

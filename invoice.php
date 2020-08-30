@@ -43,6 +43,28 @@ if(isset($_GET['id']) && $_GET['id']!=''){
     font-size: 62px;
     text-align: left;
 }
+.invoice-table th  {
+    border: 2px solid #daa51e;
+    text-align:center;
+    padding:5px;
+}
+.invoice-table td  {
+    border-right: 2px solid #daa51e;
+    text-align:center;
+    font-size: 18px;
+    font-weight:450;
+    padding:5px;
+}
+.invoice-total-table table {
+    border-collapse: collapse;
+}
+.invoice-total-table td,tr {
+    border: 1px solid #daa51e;
+    padding:10px;
+    padding-top:7px;
+    padding-bottom: 7px;
+}
+
 </style>
 
          <div class="modal-content col-md-12">
