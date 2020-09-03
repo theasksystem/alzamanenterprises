@@ -14,6 +14,9 @@ $userData2 = $conn->prepare("select * from registration where id = '".$_SESSION[
 $userData2->execute();
 $userData = $userData2->fetch(PDO::FETCH_ASSOC);
 
+$redeemableAmount = intdiv($userData['rewardpoints'],100);
+$redeemablePoints = $redeemableAmount * 100;
+
 if(isset($_GET['ud']) && $_GET['ud']!=''){
 
 $ud = base64_decode(base64_decode($_GET['ud']));
@@ -414,7 +417,7 @@ a.showcoupon {
                               $date->add(new DateInterval('P1D'));
                             if($hour >= 20 && $i == 1)  {
                               $excludeTimeSlots = false;
-                              continue;
+                              $date->add(new DateInterval('P1D'));
                             }
                           ?>
                           <option value="<?php echo $date->format('Y-m-d');?>"><?php echo $date->format('Y-m-d')?></option>
@@ -543,6 +546,14 @@ a.showcoupon {
               <h5>Total</h5>
               <span class="price">QAR <?=$CARTTOTAL; ?></span></div>
           </div>
+          <?php if($redeemablePoints > 1000) { ?>
+            <div class="order-details__count">
+              <div class="order-details__count__single">
+                <h5>Redeem Points</h5>
+                <span class="redeem-price" style="width:30%;text-align: left;font-weight: 600;"><?php echo 'QAR '.$redeemableAmount ?>&emsp;&nbsp;<input class="redeem-check" type="checkbox" id="redeem" name="redeem" value="<?=$redeemableAmount?>" style="display:inline;width:20px;height:20px;vertical-align: middle;"></span>
+              </div>  
+            </div>
+          <?php } ?>
           <div class="order-details__count">
             <div class="order-details__count__single">
               <h5>Shipping Price</h5>
@@ -577,7 +588,7 @@ a.showcoupon {
           <div class="order-details__count">
             <div class="order-details__count__single">
               <h5>Order total</h5>
-              <span class="price"><?php if($isDelieveryFree==1){ echo 'QAR '.($CARTTOTAL-$discount); }else{ echo 'QAR '.(($CARTTOTAL+$myshippingCharge)-$discount); } ?></span></div>
+              <span class="price" id="totalPrice"><?php if($isDelieveryFree==1){ echo 'QAR '.($CARTTOTAL-$discount); }else{ echo 'QAR '.(($CARTTOTAL+$myshippingCharge)-$discount); } ?></span></div>
           </div>
       </div>
     </div>
@@ -1012,6 +1023,17 @@ $(".previous").click(function(){
 $(".submit").click(function(){
 	return false;
 })
+
+$('.redeem-check').change(function() {
+    if(this.checked) {
+      <?php $CARTTOTAL=$CARTTOTAL-$redeemableAmount+$myshippingCharge; ?>
+      $('#totalPrice').html('QAR <?=$CARTTOTAL?>');    
+    } else {
+      <?php $CARTTOTAL+=$redeemableAmount;  ?>
+      $('#totalPrice').html('QAR <?=$CARTTOTAL?>');
+    }
+                    
+});
       </script>
 
 </body>

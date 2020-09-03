@@ -87,7 +87,7 @@ $_SESSION['previous_page'] = $absolute_url;
         
         <?php
 $i = 1;
-$query = $conn->prepare("select c.id,c.status,c.created_at, p.user_id as vendorId from cart_orders c LEFT JOIN products p ON p.id = c.pid WHERE c.user_id='".$_SESSION['LOGIN_ID']."' order by id desc");
+$query = $conn->prepare("select c.id,c.status,c.created_at,c.returnable, p.user_id as vendorId from cart_orders c LEFT JOIN products p ON p.id = c.pid WHERE c.user_id='".$_SESSION['LOGIN_ID']."' order by id desc");
 $query->execute();
 
 while ($row = $query->fetch(PDO::FETCH_ASSOC))
@@ -97,17 +97,15 @@ $query3->execute();
 $row3 = $query3->fetch(PDO::FETCH_ASSOC);
 ?>
 
-                                        <tr>
-                                            <td class="center"><?= $i++; ?></td>
-                                            <td class="center"><?php echo 'ALZ-'.$row['vendorId'].'-'.$row['id']; ?></td>
-                                            <td class="center"><?='QAR '.$row3['totalPrice']; ?></td>
-                                            <td class="center"><a style="color: goldenrod;" target="_blank" href="order-details?id=<?= $row['id']; ?>&vid=<?=$row['vendorId']; ?>">View Details</a></td>
-                                            <td class="center"><a style="color: goldenrod;" target="_blank" href="invoice.php?id=<?= $row['id']; ?>&vid=<?=$row['vendorId']; ?>">Download</a></td>
-                                            <td class="center"><a style="cursor: pointer;color: goldenrod;" onClick="getcartdata2('<?= $row['id']; ?>','<?=$row['vendorId']; ?>','<?=$row['status']; ?>');">View Status</a></td>
-                                            <td class="center"><?php echo date('d/m/Y', strtotime($row['created_at'])); ?></td>
-                                            
-
-                                        </tr>
+    <tr>
+        <td class="center"><?= $i++; ?></td>
+        <td class="center"><?php echo 'ALZ-'.$row['vendorId'].'-'.$row['id']; ?></td>
+        <td class="center"><?='QAR '.$row3['totalPrice']; ?></td>
+        <td class="center"><a style="color: goldenrod;" target="_blank" href="order.php?id=<?= $row['id']; ?>">View Details</a></td>
+        <td class="center"><a style="color: goldenrod;" target="_blank" href="invoice.php?id=<?= $row['id']; ?>&vid=<?=$row['vendorId']; ?>">Download</a></td>
+        <td class="center"><a style="cursor: pointer;color: goldenrod;" onClick="getcartdata2('<?= $row['id']; ?>','<?=$row['vendorId']; ?>','<?=$row['status']; ?>');">View Status</a></td>
+        <td class="center"><?php echo date('d/m/Y', strtotime($row['created_at'])); ?></td>
+    </tr>
 
 
 <?php } ?>

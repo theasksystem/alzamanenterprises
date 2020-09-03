@@ -34,10 +34,10 @@
 				}
 				else{
 					$shippingcharg = $cartproduct['ship_charge'];
-				}
+        }
 				//echo $isDelieveryFree;
 				$subtotal  =  $subtotal2;
-				$myshippingCharge+= $cartproduct['ship_charge'];
+        $myshippingCharge+= $cartproduct['ship_charge'];
 				$CARTTOTAL+= $subtotal;
 				
 	  
@@ -62,14 +62,16 @@
 //$discount;
 if (isset($_REQUEST['pay_now']))
 {
-
+    $redeemableAmount = $_POST['redeem'];
+    $redeemablePoints = $redeemableAmount * 100;
+    $totalamt-=$redeemableAmount;
     $shipAddress = $_POST["shipAddress"];
     $order_total =$_SESSION['cartTotal']= $totalamt;
     $payment_mode = $_POST["payment_mode"];
     $userid = $_SESSION['LOGIN_ID'];
     $deliverydate = $_POST["deliverydate"];
     $deliverytime = $_POST["deliverytime"];
-	  $_SESSION['ADDRESS'] = $shipAddress;
+    $_SESSION['ADDRESS'] = $shipAddress;
 	
 	$srstmt = $conn->prepare("INSERT INTO `cart_orders`(`un_id`, `user_id`, `ship_charge`, `total`, `curr_ip`, `created_at`, `payment_mode`, `address_id`, `coupan_id`, `coupan_uid`, `coupan_value`, `coupan_code`,`delivery_date`,`delivery_timeslot`)
 
@@ -116,7 +118,11 @@ if (isset($_REQUEST['pay_now']))
         $stmt->bindParam(':createdat',$globaldate, PDO::PARAM_STR);
         $stmt->execute();	
     }
-	
+    //----------------Removal of Reward Points if redeemed
+    if ($redeemableAmount != "")  {
+    $rewardupdate = $conn->prepare("update registration set rewardpoints = (select rewardpoints from registration where id = '".$_SESSION['LOGIN_ID']."') - '$redeemablePoints' where id = '".$_SESSION['LOGIN_ID']."'");
+    $rewardupdate->execute();
+    }
 		$orderid = $_SESSION['orderid'] = $lastIdd;
 		include 'send_order_email.php';
 		echo "<script>window.location='success';</script>";
