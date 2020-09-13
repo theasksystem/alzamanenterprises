@@ -252,7 +252,7 @@ $total = $orderdetail['total'];
 					</table>
 					<br>
 					<table class="invoice-total-table" style="border:2px solid;border-color:#daa51e;margin-right: 0px;margin-left: auto;">
-						<tr><td style="width:180px;">SubTotal</td><td style="width:112px">QAR '.($total+$shippingcharg).'</td></tr>
+						<tr><td style="width:160px;">SubTotal</td><td style="width:151px">QAR '.($total+$shippingcharg).'</td></tr>
 						<tr><td>Store Discount</td><td></td></tr>
 						<tr><td>Discount</td><td></td></tr>
 						<tr><td>Coupon Discount</td><td>QAR '.$coupan.'</td></tr>

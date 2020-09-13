@@ -164,9 +164,9 @@ $_SESSION['previous_page'] = $absolute_url;
       <div class="clearfix"></div>
     </div>
     <?php if($_SESSION['LOGIN_ID']!=''){ ?>
-    <div class="new-tbn"> <a href="checkout">اتمام عملية الطلب </a> </div>
+    <div class="new-tbn"> <a href="checkout">اتمام عملية الطلب </a>&nbsp; <a href="<?= $WebsiteUrl; ?>"> الاستمرار في التسوق</a>  </div>
     <?php }else{ ?>
-    <div class="new-tbn"> <a href="login-register" onClick="return confirm('لم تقم بتسجيل الدخول يرجى تسجيل الدخول اولا ثم اكمال عملية الطلب');">اتمام عملية الطلب</a> </div>
+    <div class="new-tbn"><a href="login-register" onClick="return confirm('لم تقم بتسجيل الدخول يرجى تسجيل الدخول اولا ثم اكمال عملية الطلب');">اتمام عملية الطلب</a> <a href="<?= $WebsiteUrl; ?>">الاستمرار في التسوق</a> </div>
     <?php } ?>
     
     <?php } ?>

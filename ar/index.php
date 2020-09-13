@@ -20,10 +20,13 @@ $_SESSION['previous_page'] = $absolute_url;
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
-      	<img class="slider-img" style="transform: scale(1);" src="<?= $WebsiteUrl.'/'; ?>images/banner1.png"> 
+      	<img class="slider-img" style="transform: scale(1);" src="<?= $WebsiteUrl.'/'; ?>images/banner-1.png"> 
       </div>
       <div class="carousel-item">
-     	 <img class="slider-img" style="transform: scale(1);" src="<?= $WebsiteUrl.'/'; ?>images/banner2.png"> 
+     	 <img class="slider-img" style="transform: scale(1);" src="<?= $WebsiteUrl.'/'; ?>images/banner-2.png"> 
+	  </div>
+	  <div class="carousel-item">
+     	 <img class="slider-img" style="transform: scale(1);" src="<?= $WebsiteUrl.'/'; ?>images/banner-3.png"> 
       </div>
     </div>
     <div class="aerrow-slider"> <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev"> <span class="aerrow-left" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a> <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next"> <span class="aerrow-right" aria-hidden="true"></span> <span class="sr-only">Next</span> </a> </div>

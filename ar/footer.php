@@ -5,7 +5,7 @@
     <div class="footer-custom">
       <div class="row">
       
-        <div class="col-md-2 col-sm-6 col-xs-6 text-center">
+        <div class="col-md-2 col-sm-6 col-xs-6">
           <h6 class="ftr-hdr">الشركة</h6>
           <ul class="ftr-links-sub">
             <li><a href="<?= $WebsiteUrl2.'/'; ?>about-us">عنّا</a></li>
@@ -13,7 +13,7 @@
             <li><a href="<?= $WebsiteUrl2.'/'; ?>company.php#Careers" >الوضائف</a></li>
           </ul>
         </div>
-        <div class="col-md-2 col-sm-6 col-xs-6 text-center">
+        <div class="col-md-2 col-sm-6 col-xs-6">
           <h6 class="ftr-hdr">المساعدة</h6>
           <ul class="ftr-links-sub">
             <li><a href="<?= $WebsiteUrl2.'/'; ?>help.php#payment" >الدفع</a></li>
@@ -23,7 +23,7 @@
             <li><a href="<?= $WebsiteUrl2.'/'; ?>help.php#report" >ابلاغ المخالفة</a></li>
           </ul>
         </div>
-        <div class="col-md-2 col-sm-6 col-xs-6 text-center">
+        <div class="col-md-2 col-sm-6 col-xs-6">
           <h6 class="ftr-hdr">سياسات</h6>
           <ul class="ftr-links-sub">
             <li><a href="<?= $WebsiteUrl2.'/'; ?>policy.php#Return" >سياسة الارجاع</a></li>
@@ -34,14 +34,14 @@
             <!--<li><a href="<?= $WebsiteUrl2.'/'; ?>policy.php#Compliance">EPR Compliance</a></li>-->
           </ul>
         </div>
-        <div class="col-md-2 col-sm-6 col-xs-6 text-center">
+        <div class="col-md-2 col-sm-6 col-xs-6">
           <h6 class="ftr-hdr">معلومات عن الزمان</h6>
           <ul class="ftr-links-sub">
             <li><a href="javascript:;" rel="nofollow">تسوق الالكتروني</a></li>
             <li><a href="<?= $WebsiteUrl2.'/'; ?>vendors" rel="nofollow">بع مع الزمان المشاريع</a></li>
           </ul>
         </div>
-        <div class="col-md-4 col-sm-12 col-xs-12 text-center">
+        <div class="col-md-4 col-sm-12 col-xs-12">
           <h6 class="ftr-hdr"> الاشتراك للحصول على العروض الحصرية</h6>
           <div id="ftr-email" class="ftr-email-form">
             <form id="ftrEmailForm" name="reg">

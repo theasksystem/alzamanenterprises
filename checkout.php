@@ -154,77 +154,60 @@ a.showcoupon {
 }
 </style>
 <div class="main-dv-sec">
-<form action="" name="billingform" method="post" id="billingform" onsubmit="return validmy()">
-  <div class="heading-main">
-    <h2><strong><a href="<?= $WebsiteUrl.'/'; ?>">Home</a></strong>  /  Product  / <span>Checkout</span></h2>
-  </div>
-  <section class="cart">
-  <div class="container">
-    <div class="row">
-        
-      <div class="col-md-8 col-sm-12 col-xs-12">
-          
-         
-          
-          
-          <div class="col-md-12">
-            
-           <h2 class="mb-0"> DELIVERY INFORMATION  </h2>    
-            <div class="bilinfo">
-                    
-                      <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                        
-                               <?php
-		   
-		    $userData2 = $conn->prepare("select * from tbl_address where user_id = '".$_SESSION['LOGIN_ID']."' order by setByDefault desc");
-			$userData2->execute();
-			while($userData = $userData2->fetch(PDO::FETCH_ASSOC)){
-			
-		$addressData =$conn->prepare("SELECT `name_en` as country,id FROM `country` where id='".$userData['country']."'");
-			$addressData->execute();
-			$addressData2 = $addressData->fetch(PDO::FETCH_ASSOC);
-			$addressData4 =$conn->prepare("SELECT `name_en` as city FROM `city` where id='".$userData['city']."'");
-			$addressData4->execute();
-			$addressData24 = $addressData4->fetch(PDO::FETCH_ASSOC);
-			
-			?>
-           <div class="_2HW10N">
-           <div class="_1MIUfH">
-           <div class="iqngYe">
-           <div class="_1suckO">
-           <a id="UpdShow<?=$userData['id']; ?>"><i class="fa fa-edit" aria-hidden="true"></i></a> 
-           <a href="checkout?ud=<?=base64_encode(base64_encode($userData['id'])); ?>" onClick="return confirm('Are you sure to remove this Address');"><i class="fa fa-trash" aria-hidden="true"></i></a>
-			</div></div>
-           <p class="ZBYhh4 funkyradio" style="margin-top: -35px"><span class="_2Fw4MM funkyradio-success">
-            
-            <input type="radio" name="shipAddress" value="<?=$userData['id']; ?>" id="<?=$userData['id']; ?>" <?php if($userData['setByDefault']==1){ echo 'checked'; } ?>>
-            <label for="<?=$userData['id']; ?>" style="width:36px;margin-right:10px;">&nbsp;</label>
-               
-               
-               <?=ucfirst($userData['name']); ?> &nbsp;&nbsp;<i style="font-size: 13px;"><?=$userData['alt_mobile']; ?></i></span>
-           <span class="_3MbGVP _2Fw4MM"></span></p>
-           <span class="ZBYhh4 _1Zn3iq"><?php if($userData['state']!=''){ echo '<b>Building No - </b>'.$userData['state'];} ?><br><?php if($userData['zip']!=''){ echo '<b>Zone - </b>'.$userData['zip'];} ?><br><?php if($userData['address']!=''){ echo '<b>Street - </b>'.$userData['address'];} ?><br><?php if($userData['city']!=''){ echo $addressData24['city'].' - ';} ?><?php if($userData['country']!=''){ echo $addressData2['country'];} ?></span>
-           </div>
-           </div>
-           
-          <div class="_1yf-9T" id="UpdAdd<?=$userData['id']; ?>" style="display:none">
-           <form action="" name="sign_up<?=$userData['id']; ?>" method="post">
+  <form action="" name="billingform" method="post" id="billingform" onsubmit="return validmy()">
+    <div class="heading-main">
+      <h2><strong><a href="<?= $WebsiteUrl.'/'; ?>">Home</a></strong>  /  Product  / <span>Checkout</span></h2>
+    </div>
+    <section class="cart">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-sm-12 col-xs-12">
+            <div class="col-md-12">
+              <h2 class="mb-0"> DELIVERY INFORMATION  </h2>    
+              <div class="bilinfo">
+                <div class="row">
+                  <div class="col-md-12 col-sm-12 col-xs-12">
+                    <?php		   
+                      $userData2 = $conn->prepare("select * from tbl_address where user_id = '".$_SESSION['LOGIN_ID']."' order by setByDefault desc");
+                      $userData2->execute();
+                      while($userData = $userData2->fetch(PDO::FETCH_ASSOC)){                        
+                      $addressData =$conn->prepare("SELECT `name_en` as country,id FROM `country` where id='".$userData['country']."'");
+                      $addressData->execute();
+                      $addressData2 = $addressData->fetch(PDO::FETCH_ASSOC);
+                      $addressData4 =$conn->prepare("SELECT `name_en` as city FROM `city` where id='".$userData['city']."'");
+                      $addressData4->execute();
+                      $addressData24 = $addressData4->fetch(PDO::FETCH_ASSOC);                        
+                    ?>
+                    <div class="_2HW10N">
+                      <div class="_1MIUfH">
+                        <div class="iqngYe">
+                          <div class="_1suckO">
+                            <a id="UpdShow<?=$userData['id']; ?>"><i class="fa fa-edit" aria-hidden="true"></i></a> 
+                            <a href="checkout?ud=<?=base64_encode(base64_encode($userData['id'])); ?>" onClick="return confirm('Are you sure to remove this Address');"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </div>
+                      </div>
+                      <p class="ZBYhh4 funkyradio" style="margin-top: -35px"><span class="_2Fw4MM funkyradio-success">
+                        <input type="radio" name="shipAddress" value="<?=$userData['id']; ?>" id="<?=$userData['id']; ?>" <?php if($userData['setByDefault']==1){ echo 'checked'; } ?>>
+                        <label for="<?=$userData['id']; ?>" style="width:36px;margin-right:10px;">&nbsp;</label>
+                        <?=ucfirst($userData['name']); ?> &nbsp;&nbsp;<i style="font-size: 13px;"><?=$userData['alt_mobile']; ?></i></span>
+                        <span class="_3MbGVP _2Fw4MM"></span>
+                      </p>
+                      <span class="ZBYhh4 _1Zn3iq"><?php if($userData['state']!=''){ echo '<b>Building No - </b>'.$userData['state'];} ?><br><?php if($userData['zip']!=''){ echo '<b>Zone - </b>'.$userData['zip'];} ?><br><?php if($userData['address']!=''){ echo '<b>Street - </b>'.$userData['address'];} ?><br><?php if($userData['city']!=''){ echo $addressData24['city'].' - ';} ?><?php if($userData['country']!=''){ echo $addressData2['country'];} ?></span>
+                    </div>
+                  </div>           
+                  <div class="_1yf-9T" id="UpdAdd<?=$userData['id']; ?>" style="display:none">
+                    <form action="" name="sign_up<?=$userData['id']; ?>" method="post">
                       <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12">
                           <div class="single-input">
                             <input type="text" name="name<?=$userData['id']; ?>" id="name<?=$userData['id']; ?>" placeholder="Name" value="<?=ucfirst($userData['name']); ?>">
                           </div>
-                        </div>
-                        
-                       <div class="col-md-12 col-sm-12 col-xs-12">
+                        </div>                        
+                        <div class="col-md-12 col-sm-12 col-xs-12">
                           <div class="single-input">
                             <input type="number" name="state" id="state<?=$userData['id']; ?>" placeholder="Building Number" value="<?=$userData['state']; ?>">
-                            	
                           </div>
                         </div>
-                        
-
                         <div class="col-md-12 col-sm-12 col-xs-12">
                           <div class="single-input">
                             <input type="number" name="zip" id="zip<?=$userData['id']; ?>" placeholder="Zone" value="<?=$userData['zip']; ?>">
@@ -235,48 +218,41 @@ a.showcoupon {
                             <input type="number" name="address" id="address<?=$userData['id']; ?>" placeholder="Street" value="<?=$userData['address']; ?>">
                           </div>
                         </div> 
-                        
-                        
                         <div class="col-md-6 col-sm-12 col-xs-12">
                           <div class="single-input">
                             <select name="country<?=$userData['id']; ?>" id="country<?=$userData['id']; ?>" onChange="fetch_select<?=$userData['id']; ?>(this.value);">
                             	<option value="">Choose Country</option>
                                 <?php
-                                     $query = $conn->prepare("SELECT * FROM country WHERE visible=1 order by name_en ASC");
-										$query->execute();
-
-									while ($row = $query->fetch(PDO::FETCH_ASSOC))
-                                     {
-                               ?>
+                                  $query = $conn->prepare("SELECT * FROM country WHERE visible=1 order by name_en ASC");
+										              $query->execute();
+                                  while ($row = $query->fetch(PDO::FETCH_ASSOC))
+                                  {
+                                ?>
                                <option <?php if($row['id']==$userData['country']){ echo 'selected'; } ?> value="<?php echo $row['id']; ?>"><?php echo $row['name_en']; ?></option>
-                               <?php } ?>
+                                <?php } ?>
                             </select>
-                            
                           </div>
-                        </div>
-                        
+                        </div>                       
                         <div class="col-md-6 col-sm-12 col-xs-12">
                           <div class="single-input">
                             <select name="city<?=$userData['id']; ?>" id="city<?=$userData['id']; ?>" >
                             	<option value="">Choose City</option>
                                 <?php
-                                    $query3 = $conn->prepare("SELECT * FROM city WHERE visible=1 and country_id='".$userData['country']."'");
-									$query3->execute();
-									while ($row3 = $query3->fetch(PDO::FETCH_ASSOC))
-                                     {
+                                  $query3 = $conn->prepare("SELECT * FROM city WHERE visible=1 and country_id='".$userData['country']."'");
+                                  $query3->execute();
+                                  while ($row3 = $query3->fetch(PDO::FETCH_ASSOC))
+                                  {
                                ?>
                                <option <?php if($row3['id']==$userData['city']){ echo 'selected'; } ?> value="<?php echo $row3['id']; ?>"><?php echo $row3['name_en']; ?></option>
-                               <?php } ?>
+                                <?php } ?>
                             </select>
                           </div>
                         </div>
-
                         <div class="col-md-12 col-sm-12 col-xs-12">
                           <div class="single-input">
                             <input type="number" name="alt_mobile<?=$userData['id']; ?>" id="alt_mobile<?=$userData['id']; ?>" value="<?=$userData['alt_mobile']; ?>" placeholder="+974-31559977" >
                           </div>
-                        </div>
-                                               
+                        </div>                                               
                         <div class="col-md-6 col-sm-12 col-xs-12">
                           <div class="single-input">
                             <input type="button" name="update" id="addAddress<?=$userData['id']; ?>" value="Update Address" class="checkout-btn">
@@ -290,42 +266,35 @@ a.showcoupon {
                         <div><img id="subsloader<?=$userData['id']; ?>" height="100" style="display: none;" src="images/loader.gif"></div>
                       </div>
                     </form>
-           </div>
-           
-           
-           <?php } ?>  
-           
-           <div class="_1yf-9T">
-             	<div>
-                	<div class="_2kr2AM" id="youradd">
-                    	<i class="fa fa-plus" aria-hidden="true"></i>ADD A NEW ADDRESS
-                    </div>
-               </div>
-           </div>  
-           <div class="_1yf-9T" id="myadd" style="display:none;">
-                      <div class="row">
-                          <div class="col-md-12 col-sm-12 col-xs-12">
-                              <div class="single-input">
+                  </div>
+                  <?php } ?>             
+                  <div class="_1yf-9T">
+                      <div>
+                          <div class="_2kr2AM" id="youradd">
+                              <i class="fa fa-plus" aria-hidden="true"></i>ADD A NEW ADDRESS
+                          </div>
+                      </div>
+                  </div>  
+                  <div class="_1yf-9T" id="myadd" style="display:none;">
+                    <div class="row">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="single-input">
                           <div class="heading-main">
                             <h2 style="padding-left: 0px;"><span><center><b>Please fill in the details below, For quick and hassle free delivery 🚚</b></center></span></h2>
                           </div>
-                          </div>
                         </div>
-                        <div class="col-md-8">  
+                      </div>
+                      <div class="col-md-8">  
                         <div class="col-md-12 col-sm-12 col-xs-12">
                           <div class="single-input">
                             <input type="text" name="name" id="name" placeholder="Name">
                           </div>
-                        </div>
-                        
+                        </div>                      
                         <div class="col-md-12 col-sm-12 col-xs-12">
                           <div class="single-input">
                             <input type="number" name="state" id="state" placeholder="Building Number">
-                            	
                           </div>
                         </div>
-                        
-
                         <div class="col-md-12 col-sm-12 col-xs-12">
                           <div class="single-input">
                             <input type="number" name="zip" id="zip" placeholder="Zone">
@@ -335,271 +304,240 @@ a.showcoupon {
                           <div class="single-input">
                             <input type="number" name="address" id="address" placeholder="Street">
                           </div>
-                        </div>
-                        
-                        </div>
-                        
-                        <div class="col-md-4 col-sm-12 col-xs-12">
-                           <div class="col-md-12 col-sm-12 col-xs-12">
+                        </div>                      
+                      </div>
+                      <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
                           <div class="single-input"> 
                             <img src="<?= $WebsiteUrl.'/'; ?>images/address.jpg" class="img-responsive">
                           </div>
-                          </div>
-                          
                         </div>
-                        
-                        <div class="col-md-6 col-sm-12 col-xs-12">
-                          <div class="single-input">
-                            <select name="country" id="country" onChange="fetch_select(this.value);">
-                            	<option value="">Choose Country</option>
-                                <?php
-                                     $query = $conn->prepare("SELECT * FROM country WHERE visible=1");
-										$query->execute();
-
-									while ($row = $query->fetch(PDO::FETCH_ASSOC))
-                                     {
-                               ?>
-                               <option value="<?php echo $row['id']; ?>"><?php echo $row['name_en']; ?></option>
-                               <?php } ?>
-                            </select>
-                            
-                          </div>
-                        </div>
-                        <div class="col-md-6 col-sm-12 col-xs-12">
-                          <div class="single-input">
-                            <select name="city" id="city" >
-                            	<option value="">Choose City</option>
-                                
-                            </select>
-                          </div>
-                        </div>
-                        
-                       <!-- <div class="col-md-3">
-                          <div class="single-input">
-                            <input type="text" name="country_code" id="country_code" placeholder="Country Code" readonly>
-                          </div>
-                        </div>-->
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                          <div class="single-input">
-                            <input type="number" name="alt_mobile" id="alt_mobile" placeholder="+974-31559977" >
-                          </div>
-                        </div>
-                                               
-                        <div class="col-md-6 col-sm-12 col-xs-12">
-                          <div class="single-input">
-                            <input type="button" name="update" id="addAddress" value="Add Address" class="checkout-btn">
-                          </div>
-                        </div>
-                        <div class="col-md-6 col-sm-12 col-xs-12">
-                          <div class="single-input">
-                            <input type="button" id="cancel" value="Cancel" class="checkout-btn">
-                          </div>
-                        </div>
-                        <div><img id="subsloader" height="100" style="display: none;" src="images/loader.gif"></div>
                       </div>
-           </div>
-                        
-           </div>
-          <!-- Delivery Date & Time Selection -->
-          <div>
-              <h2>&nbsp;DELIVERY DATE & TIME</h2></br>
-              <div>
-                <div class="row">
-                  <div class="deliverydate">
-                    <label for="deliverydate">&emsp;Select the Date&emsp;&emsp;&emsp;</label>
-                      <select name="deliverydate" id="deliverydate" required>
-                        <?php 
-                          $date = new DateTime(null, new DateTimeZone('Asia/Qatar'));
-                          $hour = $date->format('H');
-                          $excludeTimeSlots = true;
-                          for( $i = 1; $i<=3 ; $i++)  {
-                            if($i != 1)
-                              $date->add(new DateInterval('P1D'));
-                            if($hour >= 20 && $i == 1)  {
-                              $excludeTimeSlots = false;
-                              $date->add(new DateInterval('P1D'));
-                            }
-                          ?>
-                          <option value="<?php echo $date->format('Y-m-d');?>"><?php echo $date->format('Y-m-d')?></option>
-                        <?php  }  ?>
-                      </select>
+                      <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="single-input">
+                          <select name="country" id="country" onChange="fetch_select(this.value);">
+                            <option value="">Choose Country</option>
+                              <?php
+                                $query = $conn->prepare("SELECT * FROM country WHERE visible=1");
+                                $query->execute();
+                                while ($row = $query->fetch(PDO::FETCH_ASSOC))
+                                {
+                              ?>
+                            <option value="<?php echo $row['id']; ?>"><?php echo $row['name_en']; ?></option>
+                            <?php } ?>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="single-input">
+                          <select name="city" id="city" >
+                            <option value="">Choose City</option>                              
+                          </select>
+                        </div>
+                      </div>                      
+                      <!-- <div class="col-md-3">
+                        <div class="single-input">
+                          <input type="text" name="country_code" id="country_code" placeholder="Country Code" readonly>
+                        </div>
+                      </div>-->
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="single-input">
+                          <input type="number" name="alt_mobile" id="alt_mobile" placeholder="+974-31559977" >
+                        </div>
+                      </div>                                            
+                      <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="single-input">
+                          <input type="button" name="update" id="addAddress" value="Add Address" class="checkout-btn">
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="single-input">
+                          <input type="button" id="cancel" value="Cancel" class="checkout-btn">
+                        </div>
+                      </div>
+                      <div><img id="subsloader" height="100" style="display: none;" src="images/loader.gif"></div>
+                    </div>
                   </div>
-                </div></br>
-                <div class="row">
-                  <div class="deliverytime">
-                    <label for="deliverytime">&emsp;Select the Time Slot&emsp;</label>
-                      <select name="deliverytime" id="deliverytime" required>
-                          <?php if ($hour < 12 || $excludeTimeSlots == false) { ?>
-                            <option value="12PM-4PM" >12PM-4PM</option>
-                          <?php } ?>
-                          <?php if ($hour < 16 || $excludeTimeSlots == false) { ?>
-                            <option value="4PM-8PM"  >4PM-8PM</option>
-                          <?php } ?>
-                          <?php if ($hour < 20 || $excludeTimeSlots == false) { ?>
-                            <option value="8PM-12AM" >8PM-12AM</option>
-                          <?php } ?>
-                      </select>
-                  </div>        
+                </div>
+                <!-- Delivery Date & Time Selection -->
+                <div>
+                    <h2>&nbsp;DELIVERY DATE & TIME</h2></br>
+                    <div>
+                      <div class="row">
+                        <div class="deliverydate">
+                          <label for="deliverydate">&emsp;Select the Date&emsp;&emsp;&emsp;</label>
+                            <select name="deliverydate" id="deliverydate" required>
+                              <?php 
+                                $date = new DateTime(null, new DateTimeZone('Asia/Qatar'));
+                                $hour = $date->format('H');
+                                $excludeTimeSlots = true;
+                                for( $i = 1; $i<=3 ; $i++)  {
+                                  if($i != 1)
+                                    $date->add(new DateInterval('P1D'));
+                                  if($hour >= 20 && $i == 1)  {
+                                    $excludeTimeSlots = false;
+                                    $date->add(new DateInterval('P1D'));
+                                  }
+                                ?>
+                                <option value="<?php echo $date->format('Y-m-d');?>"><?php echo $date->format('Y-m-d')?></option>
+                              <?php  }  ?>
+                            </select>
+                        </div>
+                      </div></br>
+                      <div class="row">
+                        <div class="deliverytime">
+                          <label for="deliverytime">&emsp;Select the Time Slot&emsp;</label>
+                            <select name="deliverytime" id="deliverytime" required>
+                                <?php if ($hour < 12 || $excludeTimeSlots == false) { ?>
+                                  <option value="12PM-4PM" >12PM-4PM</option>
+                                <?php } ?>
+                                <?php if ($hour < 16 || $excludeTimeSlots == false) { ?>
+                                  <option value="4PM-8PM"  >4PM-8PM</option>
+                                <?php } ?>
+                                <?php if ($hour < 20 || $excludeTimeSlots == false) { ?>
+                                  <option value="8PM-12AM" >8PM-12AM</option>
+                                <?php } ?>
+                            </select>
+                        </div>        
+                      </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="float-right col-md-12 col-sm-12 col-xs-12">
+                    <div class="funkyradio col-md-12 col-sm-12 col-xs-12 areyou-error">
+                      <div class="row">
+                        <div class="funkyradio-success col-md-6 col-sm-12 col-xs-12">
+                            <input type="radio" name="payment_mode" value="1" id="checkbox1">
+                            <label for="checkbox1">Cash On Delivery</label>
+                        </div>
+                        <div class="funkyradio-success col-md-6 col-sm-12 col-xs-12">
+                            <input type="radio" name="payment_mode" value="2" id="checkbox2">
+                            <label for="checkbox2">Store Pickup</label>
+                        </div>
+                      </div>
+                    </div>        
+                  </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="single-input">
+                    <input type="submit" name="pay_now" value="CheckOut" class="checkout-btn">
+                  </div>
+                </div>
+              </div>
+            </div> 
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-12 col-xs-12">
+          <div class="order-details">
+            <h5 class="order-details__title">Your Order</h5>
+              <?php		  
+                $x=1;
+                $CARTTOTAL = 0;
+                $isDelieveryFree = 0;
+                $myshippingCharge = 0;
+                $TOTQTY = 0;
+                $maincartquery = $conn->prepare("select * from cart where un_id = '".$_SESSION['UNIQUEID']."' OR curr_ip = '".$_SERVER["REMOTE_ADDR"]."' order by id desc");
+                $maincartquery->execute();
+                if($maincartquery->rowCount()!=''){
+                while($maincart = $maincartquery->fetch(PDO::FETCH_ASSOC))
+                {
+                  $myproduct=$maincart['pid'];
+                  $cartproductquery = $conn->prepare("select a.*,b.company from products a left join tbl_admin b ON a.user_id=b.id where a.id = '$myproduct'");
+                  $cartproductquery->execute();
+                  $cartproduct = $cartproductquery->fetch(PDO::FETCH_ASSOC);
+                  $sameProduct = $conn->prepare("select SUM(qty) as cartqty,SUM(price*qty) as cartTot from cart where un_id = '".$_SESSION['UNIQUEID']."' and pid = '$myproduct' OR curr_ip = '".$_SERVER["REMOTE_ADDR"]."' and pid = '$myproduct'");
+                  $sameProduct->execute();
+                  $TotalQuantity = $sameProduct->fetch(PDO::FETCH_ASSOC);
+                  $subtotal2 =  $maincart['price']*$maincart['qty'];
+                  if($cartproduct['ship_charge']==''){
+                    $shippingcharg = 00;
+                    $isDelieveryFree = 1;
+                  }
+                  elseif($cartproduct['free_shipping_qty'] <= $TotalQuantity['cartqty']){
+                    $shippingcharg = 00;
+                    $isDelieveryFree = 1;
+                  }
+                  elseif($cartproduct['free_shipping_amount'] <= $TotalQuantity['cartTot']){
+                    $shippingcharg = 00;
+                    
+                  }
+                  else{
+                    $shippingcharg = $cartproduct['ship_charge'];
+                  }
+                  //echo $isDelieveryFree;
+                  $subtotal  =  $subtotal2;
+                  $myshippingCharge+= $cartproduct['ship_charge'];
+                  $CARTTOTAL+= $subtotal;
+                  $TOTQTY+= $maincart['qty'];
+                ?>
+              <div class="order-details__item">
+                <div class="single-item">
+                  <div class="single-item__thumb"> 
+                    <?php if(!empty($cartproduct['image'])){ ?>
+                    <img src="<?= $WebsiteUrl.'/'; ?>adminuploads/product/<?= $cartproduct['image']; ?>" alt="ordered item"> 
+                    <?php } ?>
+                  </div>
+                  <div class="single-item__content"> 
+                    <a href="javascript:;"><?= substr($cartproduct['product_name_en'],0,18); ?>..</a> 
+                    <span class="price">(<?=$cartproduct['company']; ?>)</span>
+                    <span class="price"><?='QAR '.$maincart['price']; ?> x <?= $maincart['qty']; ?></span>
+                    <span class="price"><?= 'SubTotal = '.$subtotal; ?></span> 
+                  </div>
+                  <div class="single-item__remove"> <a href="#"><i class="zmdi zmdi-delete"></i></a> </div>
+                </div>
+              </div>
+                <?php $x++;}}?>
+              <div class="order-details__count">
+                <div class="order-details__count__single">
+                  <h5>Total</h5>
+                  <span class="price">QAR <?=$CARTTOTAL; ?></span></div>
+              </div>
+              <?php if($redeemablePoints >= 1000) { ?>
+                <div class="order-details__count">
+                  <div class="order-details__count__single">
+                    <h5>Redeem Points</h5>
+                    <span class="redeem-price" style="width:30%;text-align: left;font-weight: 600;"><?php echo 'QAR '.$redeemableAmount ?>&emsp;&nbsp;<input class="redeem-check" type="checkbox" id="redeem" name="redeem" value="<?=$redeemableAmount?>" style="display:inline;width:20px;height:20px;vertical-align: middle;"></span>
+                  </div>  
+                </div>
+              <?php } ?>
+              <div class="order-details__count">
+                <div class="order-details__count__single">
+                  <h5>Shipping Price</h5>
+                  <span class="price"><?php if($isDelieveryFree==1){ echo 'Free Shipping'; }else{ echo 'QAR '.$myshippingCharge; } ?></span></div>
+              </div> 
+              <?php if($discount!=''){ ?> 
+              <div class="order-details__count">
+                <div class="order-details__count__single">
+                  <h5>Coupan Value</h5>
+                  <span class="price">- QAR <?=$discount; ?>
+                    <a href="checkout?myid=<?=base64_encode(base64_encode($CoupanCode['myId'])); ?>" data-toggle="tooltip" title="Click Here to Change the Coupan" style="float:right;" onclick="return confirm('Are you sure to remove this Coupan Code.');">
+                      <i class="fa fa-trash" aria-hidden="true" style="color:red"></i>
+                    </a>
+                  </span>
+                </div>
+              </div>
+              <?php }else{ ?>
+              <p class="form-row form-row-last  col-md-4 col-sm-4 col-xs-4" style="float: right;">
+                <input type="button" class="checkout-btn" id="apply_coupon" name="apply_coupon" value="Apply coupon" style="height: 42px !important;padding: 0px !important;font-size: 16px;">
+              </p>
+              <p class="form-row form-row-first col-md-8 col-sm-8 col-xs-8" style="float: right;">
+                <input type="text" name="coupon_code" class="input-text form-control" placeholder="Coupon code" id="coupon_code" value="">
+              </p>   	
+              <div><img id="subsloaderrr" height="60" style="display: none;" src="images/loader.gif"></div>
+              <span id="cpnmsg" style="color:red;"></span>
+        	    <div class="clear"></div>
+		          <?php } ?>
+              <div class="order-details__count">
+                <div class="order-details__count__single">
+                  <h5>Order total</h5>
+                  <span class="price" id="totalPrice"><?php if($isDelieveryFree==1){ echo 'QAR '.($CARTTOTAL-$discount); }else{ echo 'QAR '.(($CARTTOTAL+$myshippingCharge)-$discount); } ?></span></div>
                 </div>
               </div>
           </div>
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                       
-                        <div class="float-right col-md-12 col-sm-12 col-xs-12">
-                              
-                            <div class="funkyradio col-md-12 col-sm-12 col-xs-12 areyou-error">
-                            <div class="row">
-                                <div class="funkyradio-success col-md-6 col-sm-12 col-xs-12">
-                                    <input type="radio" name="payment_mode" value="1" id="checkbox1">
-                                    <label for="checkbox1">Cash On Delivery</label>
-                                </div>
-                                <div class="funkyradio-success col-md-6 col-sm-12 col-xs-12">
-                                    <input type="radio" name="payment_mode" value="2" id="checkbox2">
-                                    <label for="checkbox2">Store Pickup</label>
-                                </div>
-                             </div>
-                            </div>        
-                            </div>
-                         </div>
-                        <div class="col-md-12 col-sm-12 col-xs-12">
-                          <div class="single-input">
-                            <input type="submit" name="pay_now" value="CheckOut" class="checkout-btn">
-                          </div>
-                        </div>
-                      </div>
-                  
-                  </div> 
-          </div>
+        </div>
       </div>
-             
-      <div class="col-md-4 col-sm-12 col-xs-12">
-        <div class="order-details">
-          <h5 class="order-details__title">Your Order</h5>
-          <?php
-		  
-			$x=1;
-			$CARTTOTAL = 0;
-			$isDelieveryFree = 0;
-			$myshippingCharge = 0;
-			$TOTQTY = 0;
-
-			$maincartquery = $conn->prepare("select * from cart where un_id = '".$_SESSION['UNIQUEID']."' OR curr_ip = '".$_SERVER["REMOTE_ADDR"]."' order by id desc");
-			$maincartquery->execute();
-
-			if($maincartquery->rowCount()!=''){
-			
-			while($maincart = $maincartquery->fetch(PDO::FETCH_ASSOC))
-			{
-			    $myproduct=$maincart['pid'];
-			
-				$cartproductquery = $conn->prepare("select a.*,b.company from products a left join tbl_admin b ON a.user_id=b.id where a.id = '$myproduct'");
-				$cartproductquery->execute();
-				$cartproduct = $cartproductquery->fetch(PDO::FETCH_ASSOC);
-			
-				$sameProduct = $conn->prepare("select SUM(qty) as cartqty,SUM(price*qty) as cartTot from cart where un_id = '".$_SESSION['UNIQUEID']."' and pid = '$myproduct' OR curr_ip = '".$_SERVER["REMOTE_ADDR"]."' and pid = '$myproduct'");
-				$sameProduct->execute();
-				$TotalQuantity = $sameProduct->fetch(PDO::FETCH_ASSOC);
-			     
-				$subtotal2 =  $maincart['price']*$maincart['qty'];
-				if($cartproduct['ship_charge']==''){
-					$shippingcharg = 00;
-					$isDelieveryFree = 1;
-				}
-				elseif($cartproduct['free_shipping_qty'] <= $TotalQuantity['cartqty']){
-					$shippingcharg = 00;
-					$isDelieveryFree = 1;
-				}
-				elseif($cartproduct['free_shipping_amount'] <= $TotalQuantity['cartTot']){
-					$shippingcharg = 00;
-					
-				}
-				else{
-					$shippingcharg = $cartproduct['ship_charge'];
-				}
-				//echo $isDelieveryFree;
-				$subtotal  =  $subtotal2;
-				$myshippingCharge+= $cartproduct['ship_charge'];
-				$CARTTOTAL+= $subtotal;
-				$TOTQTY+= $maincart['qty'];
-				
-		  ?>
-          <div class="order-details__item">
-            <div class="single-item">
-              <div class="single-item__thumb"> 
-              <?php if(!empty($cartproduct['image'])){ ?>
-              <img src="<?= $WebsiteUrl.'/'; ?>adminuploads/product/<?= $cartproduct['image']; ?>" alt="ordered item"> 
-              <?php } ?>
-              </div>
-              <div class="single-item__content"> 
-              <a href="javascript:;"><?= substr($cartproduct['product_name_en'],0,18); ?>..</a> 
-              <span class="price">(<?=$cartproduct['company']; ?>)</span>
-              <span class="price"><?='QAR '.$maincart['price']; ?> x <?= $maincart['qty']; ?></span>
-              <span class="price"><?= 'SubTotal = '.$subtotal; ?></span> 
-              
-              </div>
-              <div class="single-item__remove"> <a href="#"><i class="zmdi zmdi-delete"></i></a> </div>
-            </div>
-          </div>
-          <?php $x++;}}?>
-          <div class="order-details__count">
-            <div class="order-details__count__single">
-              <h5>Total</h5>
-              <span class="price">QAR <?=$CARTTOTAL; ?></span></div>
-          </div>
-          <?php if($redeemablePoints > 1000) { ?>
-            <div class="order-details__count">
-              <div class="order-details__count__single">
-                <h5>Redeem Points</h5>
-                <span class="redeem-price" style="width:30%;text-align: left;font-weight: 600;"><?php echo 'QAR '.$redeemableAmount ?>&emsp;&nbsp;<input class="redeem-check" type="checkbox" id="redeem" name="redeem" value="<?=$redeemableAmount?>" style="display:inline;width:20px;height:20px;vertical-align: middle;"></span>
-              </div>  
-            </div>
-          <?php } ?>
-          <div class="order-details__count">
-            <div class="order-details__count__single">
-              <h5>Shipping Price</h5>
-              <span class="price"><?php if($isDelieveryFree==1){ echo 'Free Shipping'; }else{ echo 'QAR '.$myshippingCharge; } ?></span></div>
-          </div>
-          
-        
-        
-         <?php if($discount!=''){ ?> 
-         <div class="order-details__count">
-            <div class="order-details__count__single">
-              <h5>Coupan Value</h5>
-              <span class="price">- QAR <?=$discount; ?>
-              <a href="checkout?myid=<?=base64_encode(base64_encode($CoupanCode['myId'])); ?>" data-toggle="tooltip" title="Click Here to Change the Coupan" style="float:right;" onclick="return confirm('Are you sure to remove this Coupan Code.');">
-              <i class="fa fa-trash" aria-hidden="true" style="color:red"></i>
-              </a>
-              </span></div>
-          </div>
-          <?php }else{ ?>
-        	<p class="form-row form-row-last  col-md-4 col-sm-4 col-xs-4" style="float: right;">
-        		<input type="button" class="checkout-btn" id="apply_coupon" name="apply_coupon" value="Apply coupon" style="height: 42px !important;padding: 0px !important;font-size: 16px;">
-        	</p>
-        	<p class="form-row form-row-first col-md-8 col-sm-8 col-xs-8" style="float: right;">
-        		<input type="text" name="coupon_code" class="input-text form-control" placeholder="Coupon code" id="coupon_code" value="">
-        	</p>
-        
-        	
-            <div><img id="subsloaderrr" height="60" style="display: none;" src="images/loader.gif"></div>
-            <span id="cpnmsg" style="color:red;"></span>
-        	<div class="clear"></div>
-		  <?php } ?>
-          <div class="order-details__count">
-            <div class="order-details__count__single">
-              <h5>Order total</h5>
-              <span class="price" id="totalPrice"><?php if($isDelieveryFree==1){ echo 'QAR '.($CARTTOTAL-$discount); }else{ echo 'QAR '.(($CARTTOTAL+$myshippingCharge)-$discount); } ?></span></div>
-          </div>
-      </div>
-    </div>
-        
-        
-        
-  </div>
-</div>
-  </section>
-</form>
-
+    </section>
+  </form>
 </div> 
 
 <?php include('footer.php'); ?>
@@ -1026,7 +964,9 @@ $(".submit").click(function(){
 
 $('.redeem-check').change(function() {
     if(this.checked) {
-      <?php $CARTTOTAL=$CARTTOTAL-$redeemableAmount+$myshippingCharge; ?>
+      <?php $CARTTOTAL=$CARTTOTAL-$redeemableAmount; 
+      if($isDelieveryFree!=1)
+        $CARTTOTAL+=$myshippingCharge; ?>
       $('#totalPrice').html('QAR <?=$CARTTOTAL?>');    
     } else {
       <?php $CARTTOTAL+=$redeemableAmount;  ?>

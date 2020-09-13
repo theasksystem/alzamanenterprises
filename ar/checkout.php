@@ -15,6 +15,9 @@ $userData2 = $conn->prepare("select * from registration where id = '".$_SESSION[
 $userData2->execute();
 $userData = $userData2->fetch(PDO::FETCH_ASSOC);
 
+$redeemableAmount = intdiv($userData['rewardpoints'],100);
+$redeemablePoints = $redeemableAmount * 100;
+
 if(isset($_GET['ud']) && $_GET['ud']!=''){
 
 $ud = base64_decode(base64_decode($_GET['ud']));
@@ -391,6 +394,49 @@ a.showcoupon {
            </div>
                         
            </div>
+           <!-- Delivery Date & Time Selection -->
+           <div>
+                    <h2>&nbsp;تاريخ ووقت التوصيل</h2></br>
+                    <div>
+                      <div class="row">
+                        <div class="deliverydate">
+                          <label for="deliverydate">&emsp; اختر التاريخ&nbsp;&nbsp;&emsp;</label>
+                            <select name="deliverydate" id="deliverydate" required>
+                              <?php 
+                                $date = new DateTime(null, new DateTimeZone('Asia/Qatar'));
+                                $hour = $date->format('H');
+                                $excludeTimeSlots = true;
+                                for( $i = 1; $i<=3 ; $i++)  {
+                                  if($i != 1)
+                                    $date->add(new DateInterval('P1D'));
+                                  if($hour >= 20 && $i == 1)  {
+                                    $excludeTimeSlots = false;
+                                    $date->add(new DateInterval('P1D'));
+                                  }
+                                ?>
+                                <option value="<?php echo $date->format('Y-m-d');?>"><?php echo $date->format('Y-m-d')?></option>
+                              <?php  }  ?>
+                            </select>
+                        </div>
+                      </div></br>
+                      <div class="row">
+                        <div class="deliverytime">
+                          <label for="deliverytime">&emsp;اختر التوقيت &emsp;</label>
+                            <select name="deliverytime" id="deliverytime" required>
+                                <?php if ($hour < 12 || $excludeTimeSlots == false) { ?>
+                                  <option value="12PM-4PM" >12PM-4PM</option>
+                                <?php } ?>
+                                <?php if ($hour < 16 || $excludeTimeSlots == false) { ?>
+                                  <option value="4PM-8PM"  >4PM-8PM</option>
+                                <?php } ?>
+                                <?php if ($hour < 20 || $excludeTimeSlots == false) { ?>
+                                  <option value="8PM-12AM" >8PM-12AM</option>
+                                <?php } ?>
+                            </select>
+                        </div>        
+                      </div>
+                    </div>
+                </div>
                         <div class="col-md-12  col-sm-12 col-xs-12">
                        
                         <div class="float-right col-md-12  col-sm-12 col-xs-12">
@@ -413,6 +459,7 @@ a.showcoupon {
     </div>        
                             </div>
                          </div>
+                         <input type="checkbox" id="redeem-amt" name="redeem-amt" value="0" style="opacity:0;" checked>
                         <div class="col-md-12  col-sm-12 col-xs-12">
                           <div class="single-input">
                             <input type="submit" name="pay_now" value="اتمام عملية الطلب" class="checkout-btn">
@@ -499,6 +546,14 @@ a.showcoupon {
               <h5>Total</h5>
               <span class="price"><?=$CARTTOTAL.' ريا'; ?></span></div>
           </div>
+          <?php if($redeemablePoints >= 1000) { ?>
+                <div class="order-details__count">
+                  <div class="order-details__count__single">
+                    <h5>استخدم النقاط المكتسبة</h5>
+                    <span class="redeem-price" style="width:30%;text-align: left;font-weight: 600;"><?php echo 'ريال '.$redeemableAmount ?>&emsp;&nbsp;<input class="redeem-check" type="checkbox" id="redeem" name="redeem" value="<?=$redeemableAmount?>" style="display:inline;width:20px;height:20px;vertical-align: middle;"></span>
+                  </div>  
+                </div>
+              <?php } ?>
           <div class="order-details__count">
             <div class="order-details__count__single">
               <h5>الشحن والتوصيل</h5>
@@ -530,7 +585,7 @@ a.showcoupon {
 		  <div class="order-details__count">
             <div class="order-details__count__single">
               <h5>المجموع </h5>
-              <span class="price"><?php if($isDelieveryFree==1){ echo ($CARTTOTAL-$discount).' ريال'; }else{ echo (($CARTTOTAL+$myshippingCharge)-$discount).' ريال'; } ?></span></div>
+              <span class="price" id="totalPrice"><?php if($isDelieveryFree==1){ echo ($CARTTOTAL-$discount).' ريال'; }else{ echo (($CARTTOTAL+$myshippingCharge)-$discount).' ريال'; } ?></span></div>
           </div>
       </div>
     </div>
@@ -611,6 +666,34 @@ $('#apply_coupon').on("click", function(){
 
 });
 
+$(".deliverydate").change(function(){
+  var selectedDate =  $('.deliverydate option:selected').text();
+  selectedDate = selectedDate.substring(selectedDate.lastIndexOf("-")+1);
+  var currentDate = new Date().getDate().toLocaleString("en-US", {timeZone: "Asia/Qatar"});
+  if (selectedDate != currentDate)  {
+    $('.deliverytime').html("<label for=\"deliverytime\">&emsp;اختر التوقيت &emsp;</label>\
+                      <select name=\"deliverytime\" id=\"deliverytime\" required>\
+                        <option value=\"12PM-4PM\" >12PM-4PM</option>\
+                        <option value=\"4PM-8PM\"  >4PM-8PM</option>\
+                        <option value=\"8PM-12AM\" >8PM-12AM</option>\
+                      </select>")
+  } else {
+    $('.deliverytime').html("<label for=\"deliverytime\">&emsp;اختر التوقيت &emsp;</label>\
+                      <select name=\"deliverytime\" id=\"deliverytime\" required>\
+                          <?php if ($hour < 12 || $excludeTimeSlots == false) { ?>\
+                            <option value=\"12PM-4PM\" >12PM-4PM</option>\
+                          <?php } ?>\
+                          <?php if ($hour < 16 || $excludeTimeSlots == false) { ?>\
+                            <option value=\"4PM-8PM\"  >4PM-8PM</option>\
+                          <?php } ?>\
+                          <?php if ($hour < 20 || $excludeTimeSlots == false) { ?>\
+                            <option value=\"8PM-12AM\" >8PM-12AM</option>\
+                          <?php } ?>\
+                      </select>")
+  }
+
+  
+});
 
 $('#addAddress').on("click", function(){
 	
@@ -842,6 +925,23 @@ function validmy(){
 				
 				
 <?php } ?>				
+
+$('.redeem-check').change(function() {
+    if(this.checked) {
+      <?php $CARTTOTAL=$CARTTOTAL-$redeemableAmount; 
+      if($isDelieveryFree!=1)
+        $CARTTOTAL+=$myshippingCharge; ?>
+      $('#totalPrice').html('<?=$CARTTOTAL?> ريال');
+      $('#redeem-amt').val("<?=$redeemableAmount?>");    
+    } else {
+      <?php $CARTTOTAL+=$redeemableAmount;  ?>
+      $('#totalPrice').html('<?=$CARTTOTAL?> ريال ');
+      $('#redeem-amt').val("0"); 
+    }
+                    
+});
+
+
 			</script>
 
 

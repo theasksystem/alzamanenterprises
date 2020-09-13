@@ -104,7 +104,7 @@ $row3 = $query3->fetch(PDO::FETCH_ASSOC);
                                 <td class="center"><?= $i++; ?></td>
                                 <td class="center"><?php echo 'ALZ-'.$row['vendorId'].'-'.$row['id']; ?></td>
                                 <td class="center"><?=$row3['totalPrice'].' ريال'; ?></td>
-                                <td class="center"><a style="color: goldenrod;" target="_blank" href="order-details?id=<?= $row['id']; ?>&vid=<?=$row['vendorId']; ?>">عرض</a></td>
+                                <td class="center"><a style="color: goldenrod;" target="_blank" href="order.php?id=<?= $row['id']; ?>">عرض</a></td>
                                 <td class="center"><a style="color: goldenrod;" target="_blank" href="invoice.php?id=<?= $row['id']; ?>&vid=<?=$row['vendorId']; ?>">تحميل</a></td>
                                 <td class="center"><a style="cursor: pointer;color: goldenrod;" onClick="getcartdata2('<?= $row['id']; ?>','<?=$row['vendorId']; ?>','<?=$row['status']; ?>');">عرض</a></d>
                                 <td class="center"><?php echo date('d/m/Y', strtotime($row['created_at'])); ?></td>

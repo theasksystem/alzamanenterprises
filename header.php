@@ -45,7 +45,7 @@ function full_url( $s, $use_forwarded_host = false )
 }
 
 $absolute_url = full_url( $_SERVER );
-$arb_url = str_replace("alzamanenterprises.com","alzamanenterprises.com/ar",$absolute_url);
+$arb_url = str_replace("alzamanenterprises","alzamanenterprises/ar",$absolute_url);
 ?>
 
 <!DOCTYPE html>
@@ -223,8 +223,10 @@ if($topbar['visible']==1){
                         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
                         <script>
                         $(document).ready(function(){
-                          $(".login-p").hover(function(){
+                          $(".login-p").click(function(){
                             $(".login-drop").toggle();
+                          });
+                          $(".login-drop").hover(function(){
                             $(".login-drop").css("display","block");
                           }, function() {
                             $(".login-drop").css("display","none");

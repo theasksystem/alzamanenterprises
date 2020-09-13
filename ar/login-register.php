@@ -50,6 +50,7 @@ if(isset($_POST['loggedin'])){
   <section class="pt-20 pb-40">
     
       <!-- Login Starts -->
+    <div class="container">
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12  text-right" id="sign-in-form">
           <div class="login-wrap">
@@ -72,7 +73,7 @@ if(isset($_POST['loggedin'])){
               <div class="col-md-6 col-sm-6 col-xs-6 text-left"><div class="form-group">
                 <label class="fsz-12"> 
                 
-                <? echo '<a href="'.filter_var($authUrl, FILTER_SANITIZE_URL).'"><img src="../images/google-login.png" alt="Google Login" title="Google Login"/></a>'; ?> </label>
+                <?php echo '<a href="'.filter_var($authUrl, FILTER_SANITIZE_URL).'"><img src="../images/google-login.png" alt="Google Login" title="Google Login"/></a>'; ?> </label>
               </div></div>
                <div class="col-md-6 col-sm-6 col-xs-6"><div class="form-group">
                 <!--<label class="forgot-pw fsz-12">-->
@@ -80,7 +81,7 @@ if(isset($_POST['loggedin'])){
                     
                 <!--</label>-->
                 <label class="forgot-pw fsz-12">
-                    <? echo '<a href="#"><img src="../images/facebook.png" alt="Facebook Login" title="Facebook Login" /></a>'; ?>
+                    <?php echo '<a href="#"><img src="../images/facebook.png" alt="Facebook Login" title="Facebook Login" /></a>'; ?>
                     
                 </label>
               </div></div>
@@ -162,7 +163,7 @@ if(isset($_POST['loggedin'])){
           </div>
         </div>
       </div>
-
+    </div>
   </section>
 </div>
 

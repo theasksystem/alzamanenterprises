@@ -46,7 +46,7 @@ function full_url( $s, $use_forwarded_host = false )
 
 $absolute_url = full_url( $_SERVER );
 
-$en_url = str_replace("alzamanenterprises.com/ar","alzamanenterprises.com",$absolute_url);
+$en_url = str_replace("alzamanenterprises/ar","alzamanenterprises",$absolute_url);
 
 ?>
 <!DOCTYPE html>
@@ -192,7 +192,7 @@ if($topbar['visible']==1){
           <div class="logo desktop-view"> <a href="<?= $WebsiteUrl2; ?>"><img src="<?= $WebsiteUrl.'/'; ?>images/logo.png"></a> </div>
           <div class="search-bar">
             <form name="" action="products" method="get">
-            <input type="text" id="myInput" class="typeahead" name="s" placeholder="البحث عن منتجات" autocomplete="off" value="<?=$_GET['s']; ?>">
+            <input type="text" id="myInput" class="typeahead" name="s" placeholder="البحث عن منتجات/متاجر" autocomplete="off" value="<?=$_GET['s']; ?>">
             <button type="submit"><i class="fa fa-search"></i></button>
             <div id="myInput2"></div>
             </form>
@@ -221,6 +221,11 @@ if($topbar['visible']==1){
                         $(document).ready(function(){
                           $(".login-p").click(function(){
                             $(".login-drop").toggle();
+                          });
+                          $(".login-drop").hover(function(){
+                            $(".login-drop").css("display","block");
+                          }, function() {
+                            $(".login-drop").css("display","none");
                           });
                         });
                         </script>

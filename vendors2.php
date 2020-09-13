@@ -179,7 +179,7 @@ if(isset($_REQUEST['user_email']))
 						<input type="text" name="user_name" id="username" class="form-control" placeholder="Username">
 					</div></div>
 					<div class="col-md-6 col-sm-12 col-xs-12"><div class="form-group">
-						<input type="email" name="user_email" id="user_email" class="form-control" placeholder="Email Address*" required>
+						<input type="email" name="user_email" id="user_email" class="form-control" placeholder="&emsp;Email Address*" required>
 					</div></div>
 					<div class="col-md-6 col-sm-12 col-xs-12"><div class="form-group">
 						<input type="number" name="user_mobile" id="user_mobile" class="form-control" placeholder="3155 9977*" required>

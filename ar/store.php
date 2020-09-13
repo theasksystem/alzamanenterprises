@@ -9,6 +9,13 @@ $storeId= base64_decode(base64_decode(base64_decode($_GET['own'])));
 $getProductdetail = $conn->prepare("SELECT id,quantity,discount,discount_type,slug,image,p_size,p_color,product_name_ar,price,old_price FROM products WHERE user_id = '$storeId' and status = 1 order by id desc");
 $getProductdetail->execute();
 
+$followdetail = $conn->prepare("SELECT user_id from tbl_follow WHERE store_id = '$storeId' and user_id = '".$_SESSION['LOGIN_ID']."'");
+$followdetail->execute();
+
+$followCount = $conn->prepare("SELECT count(*) as total from tbl_follow WHERE store_id = '$storeId'");
+$followCount->execute();
+$followCountData = $followCount->fetch(PDO::FETCH_ASSOC);
+
 $getSellerdetail = $conn->prepare("SELECT id,company FROM tbl_admin WHERE id = '$storeId'");
 $getSellerdetail->execute();
 $getSellerRow = $getSellerdetail->fetch(PDO::FETCH_ASSOC);
@@ -23,8 +30,15 @@ $_SESSION['previous_page'] = $absolute_url;
 <section class="product-filter-section" style="padding-top:20px">
 		<div class="container-fluid">
 			<div class="section-title">
-				<h2><?=$getSellerRow['company']; ?> المنتجات</h2>
-			</div>
+				<h2><?=$getSellerRow['company']; ?> المنتجات
+        <?php  if($_SESSION['LOGIN_ID']!=''){
+          if( $followdetail->rowCount() > 0 )  { ?>
+            <span class="follow"><a class="fa fa-check-circle" aria-hidden="true" href="#" ><span style="font-family: sans-serif">&nbsp;Following</span></a><br><span class="follow-count" style="color: grey;text-align:right;font-size:large;"><?=$followCountData['total']?> Followers</span></span> 
+          <?php } else { ?>
+            <span class="follow"><a href="<?= $WebsiteUrl.'/'; ?>follow.php?store='<?=base64_encode(base64_encode(base64_encode($storeId)));?>'">Follow&nbsp;Us&nbsp;&nbsp;<i class="fas fa-bell"></i></a><br><span class="follow-count" style="color: grey;text-align:left;font-size:large;"><?=$followCountData['total']?> Followers</span></span>
+          <?php } }?>
+        </h2>
+      </div>
 		
 			<div class="row">
             
