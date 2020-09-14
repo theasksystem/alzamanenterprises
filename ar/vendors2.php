@@ -130,7 +130,7 @@ if(isset($_REQUEST['user_email']))
 		unset($_SESSION['qid_number']);
 		unset($_SESSION['cr_number']);
 		unset($_SESSION['category']);
-		$msg = 'Request Processed Successfully. waiting for Approval.';
+		$msg = 'Request processed successfully. Waiting for approval.';
 		
 	
 } else {
@@ -166,20 +166,20 @@ if(isset($_REQUEST['user_email']))
         <div class="col-md-12 col-sm-12 col-xs-12" id="sign-up-form">
           <div class="register-wrap text-right">
 		  <h3 class="fsz-25 ptb-15"><span class="light-font">Start selling your items on our site</span> <strong>Register Now </strong> </h3>
-            <p>By Creating An Account With Our Website, You Will Be Able To Grow Your Business Exponentially</p>
+            <p>By creating an account with our website, you will be able to grow your business exponentially</p>
             
             <span class="text-danger fsz-25 ptb-15" id="reg-error2"><?php if(isset($errmsg)){ echo $errmsg; } ?></span>
             <span class="text-success fsz-25 ptb-15" id="reg-error22"><?php if(isset($msg)){ echo $msg; } ?></span></h3>
             <form name="sign_up" id="sign_up" method="post" class="register-form row  pt-50 second_form" >
               	<div class="row">
               		<div class="col-md-6 col-sm-12 col-xs-12"><div class="form-group">
-						<input type="text" name="user_firstname" id="user_name" class="form-control" placeholder="First Name*" required>
+						<input type="text" name="user_firstname" id="user_name" class="form-control" placeholder="الاسم الاول*" required>
 					</div></div>
 					<div class="col-md-6 col-sm-12 col-xs-12"><div class="form-group">
-						<input type="text" name="user_lastname" id="user_lastname" class="form-control" placeholder="Last Name*" required>
+						<input type="text" name="user_lastname" id="user_lastname" class="form-control" placeholder="اسم  العائلة*" required>
 					</div></div>
 					<div class="col-md-6 col-sm-12 col-xs-12"><div class="form-group">
-						<input type="text" name="user_name" id="username" class="form-control" placeholder="Username">
+						<input type="text" name="user_name" id="username" class="form-control" placeholder="اسم المستخدم">
 					</div></div>
 					<div class="col-md-6 col-sm-12 col-xs-12"><div class="form-group">
 						<input type="email" name="user_email" id="user_email" class="form-control" placeholder="&emsp;البريد الالكتروني*" required>
@@ -188,35 +188,35 @@ if(isset($_REQUEST['user_email']))
 						<input type="number" name="user_mobile" id="user_mobile" class="form-control" placeholder="3155 9977*" required>
 					</div></div>
 					<div class="col-md-6 col-sm-12 col-xs-12"><div class="form-group">
-						<select name="gender" id="gender" class="form-control">
-							<option value="">Select Gender</option>
-							<option value="Male">Male</option>
-							<option value="Female">Female</option>
+						<select name="gender" id="gender" class="form-control" style="direction: rtl;">
+							<option value="">اختر الجنس</option>
+							<option value="Male">ذكر</option>
+							<option value="Female">انثى</option>
 						</select>
 					</div></div>
 					<div class="col-md-6 col-sm-12 col-xs-12"><div class="form-group">
-						<input type="password" name="user_pass" id="user_pass" class="form-control" placeholder="Password*" required>
+						<input type="password" name="user_pass" id="user_pass" class="form-control" placeholder="الرقم السري*" required>
 						<i class="fa fa-eye" onclick="showHidePassword()" class="passhide" ></i>
 					</div></div>
 					<div class="col-md-6 col-sm-12 col-xs-12"><div class="form-group ">
-						<input type="password" name="user_cpass" id="user_cpass" class="form-control" placeholder="Confirm Password*" required>
+						<input type="password" name="user_cpass" id="user_cpass" class="form-control" placeholder="تاكيد  الرقم السري*" required>
 						<i class="fa fa-eye" onclick="showHidePassword()" class="passhide" ></i>
 					</div></div>
 					<div class="col-md-6 col-sm-12 col-xs-12"><div class="form-group">
-						<input type="text" name="instagram_username" id="instagram_username" class="form-control" placeholder="Instagram Username">
+						<input type="text" name="instagram_username" id="instagram_username" class="form-control" placeholder="اسم  المستخدم في الانستقرام">
 					</div></div>
 					<div class="col-md-6 col-sm-12 col-xs-12"><div class="form-group ">
-						<input type="text" name="store_name" id="store_name" class="form-control" placeholder="Store Name*" required>
+						<input type="text" name="store_name" id="store_name" class="form-control" placeholder="اسمر المتجر*" required>
 					</div></div>
 					<div class="col-md-6 col-sm-12 col-xs-12"><div class="form-group">
-						<input type="number" name="qid_number" minlength="11" maxlength="11" id="qid_number" class="form-control" placeholder="QID Number*" required>
+						<input type="number" name="qid_number" minlength="11" maxlength="11" id="qid_number" class="form-control" placeholder="الرقم الشخصي*" required>
 					</div></div>
 					<div class="col-md-6 col-sm-12 col-xs-12"><div class="form-group ">
-						<input type="number" name="cr_number" minlength="5" maxlength="6" id="cr_number" class="form-control" placeholder="CR Number">
+						<input type="number" name="cr_number" minlength="5" maxlength="6" id="cr_number" class="form-control" placeholder="رقم السجل التجاري">
 					</div></div>
 					<div class="col-md-6 col-sm-12 col-xs-12"><div class="form-group">
-						<select name="category" id="category" class="form-control" required>
-							<option value="">Select Category</option>
+						<select name="category" id="category" class="form-control"  style="direction: rtl;" required>
+							<option value="">اختر الفئة</option>
 							<?php while($row = $categories->fetch(PDO::FETCH_ASSOC)) {
 									echo '<option value="'.$row["id"].'">'.$row["name_en"].' ( '.$row['name_ar'].' ) '.'</option>';
 									} 
@@ -225,8 +225,8 @@ if(isset($_REQUEST['user_email']))
 					</div></div>
             
               		<div class="col-md-12 col-sm-12 col-xs-12"><div class="form-group pt-15">
-                		<button type="submit" class="btn theme-btn-2" id="sign-up2"> <b> SUBMIT REQUEST</b> </button>
-                		<label class="forgot-pw fsz-12 float-right"><a href="vendors" class="clr-txt-2 pw" id="login"> Already registered? <strong>Login </strong></a> </label>
+                		<button type="submit" class="btn theme-btn-2" id="sign-up2"> <b> تقديم الطلب </b> </button>
+                		<label class="forgot-pw fsz-12 float-right"><a href="vendors" class="clr-txt-2 pw" id="login"> هل انت مشترك معنا سابقا؟ <strong>تسجيل الدخول </strong></a> </label>
               		</div></div>
                 </div>
             </form>

@@ -129,7 +129,7 @@ if(isset($_REQUEST['user_email']))
 		unset($_SESSION['qid_number']);
 		unset($_SESSION['cr_number']);
 		unset($_SESSION['category']);
-		$msg = 'Request Processed Successfully. waiting for Approval.';
+		$msg = 'Request processed successfully. Waiting for approval.';
 		
 	
 } else {
@@ -163,7 +163,7 @@ if(isset($_REQUEST['user_email']))
         <div class="col-md-12 col-sm-12 col-xs-12" id="sign-up-form">
           <div class="register-wrap">
             <h3 class="fsz-25 ptb-15"><span class="light-font">Start selling your items on our site</span> <strong>Register Now </strong> </h3>
-            <p>By Creating An Account With Our Website, You Will Be Able To Grow Your Business Exponentially</p>
+            <p>By creating an account with our website, you will be able to grow your business exponentially</p>
             
             <span class="text-danger fsz-25 ptb-15" id="reg-error2"><?php if(isset($errmsg)){ echo $errmsg; } ?></span>
             <span class="text-success fsz-25 ptb-15" id="reg-error22"><?php if(isset($msg)){ echo $msg; } ?></span></h3>
