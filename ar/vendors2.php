@@ -166,7 +166,7 @@ if(isset($_REQUEST['user_email']))
         <div class="col-md-12 col-sm-12 col-xs-12" id="sign-up-form">
           <div class="register-wrap text-right">
 		  <h3 class="fsz-25 ptb-15"><span class="light-font">Start selling your items on our site</span> <strong>Register Now </strong> </h3>
-            <p>By creating an account with our website, you will be able to grow your business exponentially</p>
+            <p>عند إنشائك الحساب على موقعنا ستتمكن من توسيع نشاطك التجاري بصورة مضاعفة</p>
             
             <span class="text-danger fsz-25 ptb-15" id="reg-error2"><?php if(isset($errmsg)){ echo $errmsg; } ?></span>
             <span class="text-success fsz-25 ptb-15" id="reg-error22"><?php if(isset($msg)){ echo $msg; } ?></span></h3>
@@ -226,7 +226,7 @@ if(isset($_REQUEST['user_email']))
             
               		<div class="col-md-12 col-sm-12 col-xs-12"><div class="form-group pt-15">
                 		<button type="submit" class="btn theme-btn-2" id="sign-up2"> <b> تقديم الطلب </b> </button>
-                		<label class="forgot-pw fsz-12 float-right"><a href="vendors" class="clr-txt-2 pw" id="login"> هل انت مشترك معنا سابقا؟ <strong>تسجيل الدخول </strong></a> </label>
+                		<label class="forgot-pw fsz-12 float-left"><a href="vendors" class="clr-txt-2 pw" id="login"> هل انت مشترك معنا سابقا؟ <strong>تسجيل الدخول </strong></a> </label>
               		</div></div>
                 </div>
             </form>
